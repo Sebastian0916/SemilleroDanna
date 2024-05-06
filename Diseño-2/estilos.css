@@ -75,7 +75,7 @@ body {
 }
 
 .share {
-  background-image: url(IMAGENES/person\ 1.png);
+  background-image: url(imagenes-2/person\ 1.png);
   background-repeat: no-repeat;
   width: 48.33px;
   height: 47.69px;
@@ -95,56 +95,4 @@ body {
 .profile{
     gap: 15px;
 }
-/* body {
-    background-color: beige;
 
-}
-
-.container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 60px;
-}
-
-.contenedor {
-    background-color: white;
-    display: flex;
-    justify-content: center;
-}
-
-.florero {
-    height: 40%;
-    width: 40%;
-    margin: 50px;
-}
-
-
-.containerTextos{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    
-}
-.texto1 {
-    color: black;
-    margin-top: 60px;
-
-}
-
-.texto2 {
-    color: #ACB2BF;
-}
-.containerInformacion{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.informacionPersona {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
- */
