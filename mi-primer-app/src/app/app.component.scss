@@ -1,34 +1,30 @@
-.justify-center{
-    display: flex;
-    justify-content: center;
+$background-color: white;
+
+@mixin estilos-cartas($width, $height, $background-color) {
+  width: $width;
+  height: $height;
+  background-color: #{$background-color};
 }
 
-.align-center{
-    display: flex;
-    align-content: center;
-}
-.between{
-    display: flex;
-    justify-content: space-between;
-}
-.padding {
-    padding: 46px;
-  }
-.text-center{
-    text-align: center;
-}
-.gap-1 {
-    display: flex;
-    gap: 20px;
-  }
-.contenedor-1{
-    width: 519px;
-    height: 177px;
+@mixin espacios{
+    display:flex;
+    justify-content:center ;
+    align-content:center;
+    padding:46px;
 }
 
-.contenedor-2{
-    width: 294px;
-    height: 200px;
-    background-color:white;
-    
+.contenedor-1 {
+  @include estilos-cartas(519px, 177px, #fafafa);
+}
+
+.titulos{
+    @include espacios;
+}
+
+.cartas{
+    @include espacios;
+}
+
+.contenedor-2 {
+  @include estilos-cartas(294px, 200px, white );
 }
