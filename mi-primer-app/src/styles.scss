@@ -1,3 +1,5 @@
+@import "./app/utilidades/main.scss";
+@import "./app/utilidades/mixins.scss";
 *{
     margin: 0;
     padding: 0;
@@ -9,10 +11,5 @@ body{
     background-color: #FAFAFA;
 }
 
-@mixin espacios{
-    display:flex;
-    justify-content:center ;
-    align-content:center;
-    padding:46px;
-}
+
 
