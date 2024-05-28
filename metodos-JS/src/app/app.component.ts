@@ -4,11 +4,12 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true 
+  standalone: true,
 })
 export class AppComponent {
+  frutas: string[] = ['pera', 'piña', 'uva', 'manzana', 'melon'];
+  animales: string[] = ['perro', 'gato', 'vaca', 'caballo', 'toro'];
   empleados: string[] = ['Sofia', 'Juan', 'Karen', 'Camilo', 'David'];
-  codigoEmpleado: number[] = [234, 2345, 2345, 678, 456, 9876];
   marcasVehiculos: string[] = [
     'Toyota',
     'Ford',
@@ -16,29 +17,34 @@ export class AppComponent {
     'Honda',
     'Mercedes-Benz',
   ];
-  animales: string[] = ['perro', 'gato', 'vaca', 'caballo', 'toro'];
-  frutas: string[] = ['pera', 'piña', 'uva', 'manzana', 'melon'];
+  codigoEmpleado: number[] = [234, 2345, 2345, 678, 456, 9876];
+  numeros = [3, 10, 18, 20];
 
   codigo!: string;
   numeroAtolocalstring!: string;
 
   pop!: string[];
-  fill!: number[];
   sort!: string[];
   push!: string[];
-  join: string = '';
-  find: string = '';
   splice!: string[];
   reverse!: string[];
-  map: number[] = [];
-  unShift!: number[];
-  indexOf:number = -1;
   concat: string[] = [];
   forEach: string[] = [];
-  findIndex: number = -1;
-  includes: boolean = true;
   empleadosPerezosos!: string[];
 
+  join: string = '';
+  find: string = '';
+
+  map: number[] = [];
+  unShift!: number[];
+  fill!: number[];
+  reduce: number = 0;
+
+  indexOf: number = -1;
+  findIndex: number = -1;
+
+  some!: boolean;
+  includes!: boolean;
   constructor() {
     this.metodoToString();
     this.metodoSlice();
@@ -48,17 +54,19 @@ export class AppComponent {
     this.metodoUnShift(3546);
     this.metodoFill();
     this.metodoForeach();
-    this.metodofilter();
-    this.metodopop();
-    this.metodomap();
-    this.metodosplice();
-    this.metodosort();
-    this.metodofind();
-    this.metodoconcat();
-    this.metodofindIndex();
-    this.metodoincludes();
-    this.metodoindexOf();
-    this.metodojoin();
+    this.metodoFilter();
+    this.metodoPop();
+    this.metodoMap();
+    this.metodoSplice();
+    this.metodoSort();
+    this.metodoFind();
+    this.metodoConcat();
+    this.metodoFindIndex();
+    this.metodoIncludes();
+    this.metodoIndexOf();
+    this.metodoReduce();
+    this.metodoJoin();
+    this.metodoSome();
   }
 
   metodoUnShift(codigoNuevo: number): void {
@@ -95,60 +103,61 @@ export class AppComponent {
     });
   }
 
-  metodofilter(): void {
+  metodoFilter(): void {
     this.empleados = [
       ...this.empleados.filter((empleado) => empleado.includes('u')),
     ];
   }
 
-  metodopop() {
+  metodoPop() {
     this.pop = [...this.animales];
     this.pop.pop();
   }
 
-  metodomap() {
-    this.map = this.empleados.map((empleado) => empleado.length);
+  metodoMap() {
+    this.map = this.codigoEmpleado.map((e) => e * 6);
   }
 
-  metodosort() {
+  metodoSort() {
     this.animales.sort();
   }
 
-  metodosplice() {
+  metodoSplice() {
     this.splice = [...this.animales];
     this.splice.splice(2, 1);
   }
 
-  metodojoin(): void {
+  metodoJoin(): void {
     this.join = this.marcasVehiculos.join('  ');
-    
   }
 
-  metodoindexOf(): void {
+  metodoIndexOf(): void {
     this.indexOf = this.marcasVehiculos.indexOf('Honda');
   }
 
-  metodoincludes(): void {
+  metodoIncludes(): void {
     this.includes = this.empleados.includes('Juan');
   }
 
-  metodoconcat(): void {
+  metodoConcat(): void {
     this.concat = [...this.frutas, ...this.animales];
   }
 
-  metodofind() {
+  metodoFind() {
     this.find = this.animales.find((animal) => animal.includes('g')) || '';
   }
 
-  metodofindIndex() {
+  metodoFindIndex() {
     this.findIndex = this.frutas.findIndex((frutas) => frutas.includes('n'));
   }
 
-  metodosome(){
-
+  metodoSome() {
+    this.some = this.numeros.some((num) => {
+      return num < 2;
+    });
   }
 
-  metodoreduce(){
-
+  metodoReduce() {
+    this.reduce = this.numeros.reduce((acc, cur) => acc + cur, 0);
   }
 }
