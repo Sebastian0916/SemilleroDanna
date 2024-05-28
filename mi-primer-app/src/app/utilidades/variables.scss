@@ -1,0 +1,24 @@
+//---------Tipografias-------------------------
+$font-size-titulo: 15px;
+$font-size-subtitulo: 10px;
+// Color borde
+$error: #e74d4f;
+$info:#4d98ee;
+$warning:#f8aa49;
+$alert:#3fd0ce;
+//Colores globales
+$white: white;
+$subtitle-color: #cccccc;
+$text-titulo:#000;
+ //
+$color-global: (
+    "white": $white,
+    "subtitle-color": $subtitle-color
+);
+
+$colorBorde: (
+  "error": $error,
+  "info": $info,
+  "warning": $warning,
+  "alert": $alert,
+);
