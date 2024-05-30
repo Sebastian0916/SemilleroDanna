@@ -95,10 +95,10 @@
       transform: scaleX(1.4) scaleY(1.6);
       opacity: 0;
     }
+    &-animated {
+      animation: moveInBotton 0.5s ease-out 0.75s;
+      animation-fill-mode: backwards;
+    }
   }
   
-  .btn-animated {
-    animation: moveInBotton 0.5s ease-out 0.75s;
-    animation-fill-mode: backwards;
-  }
   
