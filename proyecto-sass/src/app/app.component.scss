@@ -12,13 +12,18 @@
     ),
     url("../assets/imagenes/hero.jpg");
   opacity: 0.8;
-
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  
   &__logo {
     @include tamaño(" ", 2.1875rem);
+    top: 2.5rem;
+    left: 2.5rem;
   }
 
   &__text-box {
     transform: translate(-50%, -50%);
+    top: 40%;
+    left: 50%;
   }
 }
 
@@ -28,6 +33,7 @@
   &--main {
     font-size: 3.75rem;
     font-weight: 400;
+    letter-spacing:2.1875rem;
     animation-name: moveInleft;
     animation-duration: 1s;
     animation-timing-function: ease-out;
@@ -36,11 +42,16 @@
   &--sub {
     font-size: 1.25rem;
     font-weight: 700;
+    letter-spacing: 1.0875rem;
     animation: moveInRight;
   }
 }
 
 .btn {
+  border-radius:6.25rem;
+  margin-bottom: 3.75rem;
+
+
     &:link,
     &:visited {
       padding: 0.9375rem 2.5rem;

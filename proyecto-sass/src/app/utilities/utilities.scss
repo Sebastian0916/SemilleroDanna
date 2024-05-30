@@ -10,38 +10,19 @@
     position: relative;
 }
 
-.position-absolute-1{
+.position-absolute{
     position: absolute;
-    top: 2.5rem;
-    left: 2.5rem;
 }
 
-.position-absolute-2{
-    position: absolute;
-    top: 40%;
-    left: 50%;
-}
-
-.margin-bottom{
-    margin-bottom: 3.75rem;
-}
-
-.border-radius-btn{
-    border-radius:6.25rem;
-}
-.background-size{
+.background-cover{
     background-size: cover;
 }
-.background-position{
+.background-position-top{
     background-position: top;
 }
 
-.backface-visibility{
+.backface-visibility-hidden{
     backface-visibility: hidden;
-}
-
-.clip-path{
-    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 }
 
 .text-aling-center{
@@ -55,10 +36,3 @@
     text-decoration: none;
 }
 
-.letter-spacing-main{
-    letter-spacing:2.1875rem ;
-}
-
-.letter-spacing-2{
-    letter-spacing: 1.0875rem;
-}
