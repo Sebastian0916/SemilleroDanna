@@ -28,6 +28,8 @@ export class AppComponent {
   push!: string[];
   splice!: string[];
   reverse!: string[];
+  upperCase: string[] = [];
+  lowerCase: string[] = [];
   concat: string[] = [];
   forEach: string[] = [];
   empleadosPerezosos!: string[];
@@ -67,6 +69,8 @@ export class AppComponent {
     this.metodoReduce();
     this.metodoJoin();
     this.metodoSome();
+    this.metodoLowerCase();
+    this.metodoUpperCase();
   }
 
   metodoUnShift(codigoNuevo: number): void {
@@ -105,7 +109,7 @@ export class AppComponent {
 
   metodoFilter(): void {
     this.empleados = [
-      ...this.empleados.filter((empleado) => empleado.includes('u')),
+      ...this.empleados.filter((empleado) => empleado.includes('a')),
     ];
   }
 
@@ -160,4 +164,15 @@ export class AppComponent {
   metodoReduce() {
     this.reduce = this.numeros.reduce((acc, cur) => acc + cur, 0);
   }
+
+  metodoLowerCase() {
+    this.lowerCase = [...this.empleados];
+    this.lowerCase = this.lowerCase.map((empleado) => empleado.toLowerCase());
+  }
+
+ metodoUpperCase(){
+    this.upperCase = [...this.animales];
+    this.upperCase = this.upperCase.map(animal => animal.replace(/\b\w/g, letra => letra.toUpperCase()));
+}
+
 }
