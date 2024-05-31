@@ -11,7 +11,7 @@
       rgba($color-primary-dark, 0.8)
     ),
     url("../assets/imagenes/hero.jpg");
-  opacity: 0.8;
+  opacity: $opacity;
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   
   &__logo {
@@ -67,18 +67,18 @@
     }
   
     &:active {
-      transform: translateY(-0.0625);
+      transform: translateY(-0.0625rem);
     }
   
     &--white {
       background-color: $color-white;
-      color: $text--grey--dark;
+      color: $text-grey-dark;
     }
   
     &::after {
       content: "";
-      display: inherit;
       @include tamaño(100%, 100%);
+      display: inherit;
       border-radius: 6.25rem;
       position: absolute;
       top: 0;
