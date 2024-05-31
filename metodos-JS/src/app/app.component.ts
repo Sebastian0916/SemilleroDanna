@@ -174,5 +174,4 @@ export class AppComponent {
     this.upperCase = [...this.animales];
     this.upperCase = this.upperCase.map(animal => animal.replace(/\b\w/g, letra => letra.toUpperCase()));
 }
-
 }
