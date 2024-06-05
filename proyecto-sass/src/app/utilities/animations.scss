@@ -1,38 +1,33 @@
+
 @keyframes moveInleft {
     0% {
-      opacity: 0;
-      transform: translateX(-6.25rem);
+      @include animaciones(0,translateX(-6.25rem));
     }
     80% {
-      transform: translateX(0.625rem);
+      @include animaciones(" ",translateX(0.625rem));
     }
     100% {
-      opacity: 1;
-      transform: translate(0);
+      @include animaciones(1,translate(0));
     }
   }
   
   @keyframes moveInright {
     0% {
-      opacity: 0;
-      transform: translateX(6.25rem);
+      @include animaciones(0,translateX(6.25rem));
     }
     80% {
-      transform: translateX(-0.625rem);
+      @include animaciones(" ",translateX(-0.625rem));
     }
     100% {
-      opacity: 1;
-      transform: translate(0);
+      @include animaciones(1,translate(0));
     }
   }
   
   @keyframes moveInBotton {
     0% {
-      opacity: 0;
-      transform: translateY(1.0875rem);
+      @include animaciones(0,translateY(1.0875rem));
     }
     100% {
-      opacity: 1;
-      transform: translateY(0);
+      @include animaciones(1,translateY(0));
     }
   }

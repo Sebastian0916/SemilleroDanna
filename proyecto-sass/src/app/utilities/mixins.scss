@@ -2,3 +2,7 @@
     width: $width;
     height: $height;
 }
+@mixin animaciones($opacity,$tranform){
+    opacity:$opacity;
+    transform:$tranform;
+}

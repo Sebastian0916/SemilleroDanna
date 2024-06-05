@@ -25,27 +25,27 @@
     top: 40%;
     left: 50%;
   }
+  &__heading-primary {
+    color: $color-white;
+  
+    &--main {
+      font-size: 3.75rem;
+      font-weight: 400;
+      letter-spacing:2.1875rem;
+      animation-name: moveInleft;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+    }
+  
+    &--sub {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 1.0875rem;
+      animation: moveInRight;
+    }
+  }
 }
 
-.heading-primary {
-  color: $color-white;
-
-  &--main {
-    font-size: 3.75rem;
-    font-weight: 400;
-    letter-spacing:2.1875rem;
-    animation-name: moveInleft;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-  }
-
-  &--sub {
-    font-size: 1.25rem;
-    font-weight: 700;
-    letter-spacing: 1.0875rem;
-    animation: moveInRight;
-  }
-}
 
 .heading-secondary{
   font-size: 3.5rem;
