@@ -7,9 +7,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
+import { CounterComponent } from './counter/counter.component';
+import { HeroComponent } from './heroes/hero/hero.component';
+import { ListComponent } from './heroes/list/list.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CounterComponent,
+    HeroComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
