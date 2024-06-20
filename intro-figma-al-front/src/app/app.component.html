@@ -1,17 +1,11 @@
-<div class="row full-width p-2 gap-1">
+<div class="card">
+    @for(card of cards; track card ){
+    <app-card
 
-  <mat-card>
-    <mat-card-content class="column">
-      <div class="row align-items-center justify-content-start gap-1">
-        <mat-divider [vertical]="true" class="bg-primary height"></mat-divider>
-        <h6 class="color-text-primary">Configuración general</h6>
-      </div>
-      <div class="gap-3 row">
-        <p class="mat-body2 color-text-secondary">
-          Ajusta tipos de licitación, adjuntos, documentos solicitados, causas de desfase y acceso a cotizaciones.
-        </p>
-        <img class="" mat-card-image src="../assets/configuracion-general.svg" alt="Icon" />
-      </div>
-    </mat-card-content>
-  </mat-card>
-</div>
+      [titulo]="card.titulo"
+      [descripcion]="card.descripcion"
+      [icono]="card.icono"
+            />
+
+    }
+  </div>
