@@ -4,9 +4,9 @@ import { CardComponent,tipoIcono } from './card/card/card.component';
 
 
 interface Props{
-  titulo: string;
-  descripcion: string;
-  icono: tipoIcono;
+  title: string;
+  description: string;
+  icon: tipoIcono;
 }
 @Component({
   selector: 'app-root',
@@ -16,27 +16,27 @@ interface Props{
 export class AppComponent {
   cards: Props[] = [
     {
-      titulo: 'Configuración general',
-      descripcion: 'Ajusta tipos de licitación, adjuntos, documentos solicitados,causas de desface y acceso a cotizaciones',
-      icono: "configuracion",
+      title: 'Configuración general',
+      description: 'Ajusta tipos de licitación, adjuntos, documentos solicitados,causas de desface y acceso a cotizaciones',
+      icon: "configuracion",
     },
 
     {
-      titulo: 'Flujos y pasos de licitación',
-      descripcion: 'Crea flujos y configura sus pasos de una licitación',
-      icono: "flujo",
+      title: 'Flujos y pasos de licitación',
+      description: 'Crea flujos y configura sus pasos de una licitación',
+      icon: "flujo",
     },
     
     {
-      titulo: 'Perfiles de acceso',
-      descripcion: 'Configura según el perfil del usuario los permisos a flujos de licitación.',
-      icono: "perfil",
+      title: 'Perfiles de acceso',
+      description: 'Configura según el perfil del usuario los permisos a flujos de licitación.',
+      icon: "perfil",
     },
 
     {
-      titulo: 'Plantillas de notificaciones',
-      descripcion: '---',
-      icono: "plantillas",
+      title: 'Plantillas de notificaciones',
+      description: '---',
+      icon: "plantillas",
     },
   ]
 }

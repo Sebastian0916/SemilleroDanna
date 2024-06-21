@@ -11,21 +11,21 @@ export type tipoIcono = 'configuracion'|'flujo'|'perfil'|'plantillas';
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
-  @Input() titulo: string = ' ';
-  @Input() descripcion: string = ' ';
-  @Input() icono!: tipoIcono;
+  @Input() title: string = ' ';
+  @Input() description: string = ' ';
+  @Input() icon!: tipoIcono;
   
 
   constructor(){}
 
   get iconCard():string{
-    return  this.icono === 'configuracion'
+    return  this.icon === 'configuracion'
     ?'/assets/icons/Configuracion.svg'
-    :this.icono ==='flujo'
+    :this.icon ==='flujo'
     ?'/assets/icons/flujo.svg'
-    :this.icono ==='perfil'
+    :this.icon ==='perfil'
     ?'/assets/icons/perfil.svg'
-    :this.icono ==='plantillas'
+    :this.icon ==='plantillas'
     ?'/assets/icons/plantilla.svg'
     :'';
   }
