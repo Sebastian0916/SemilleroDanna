@@ -1,1 +1,6 @@
-// @mixin tamaño()
+@use "sass:map";
+
+@mixin tamaño($width, $height) {
+    width: $width;
+    height: $height;
+  }
