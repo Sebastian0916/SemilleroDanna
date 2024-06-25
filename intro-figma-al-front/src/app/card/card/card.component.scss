@@ -1,16 +1,25 @@
-mat-divider{
-    height: 22px;
-    width: 2px;
+mat-divider {
+  height: 22px;
+  width: 2px;
 }
 
-.card{
-    width: 360px;
-    height: 137px;
-    
-}
-
-.card__description{
+.card {
+  width: 360px;
+  height: 137px;
+  
+  &__container-text {
     width: 328px;
     height: 75px;
+  }
+
+  &__description {
+    width: 230px;
+    height: 48px;
     font-size: 13px;
+  }
+
+  &__img {
+    width: 86px;
+    height: 75px;
+  }
 }

@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CardComponent,tipoIcono } from './card/card/card.component';
+import { CardComponent, tipoIcono } from './card/card/card.component';
 
-
-interface Props{
+interface Props {
   title: string;
   description: string;
   icon: tipoIcono;
@@ -17,27 +16,28 @@ export class AppComponent {
   cards: Props[] = [
     {
       title: 'Configuración general',
-      description: 'Ajusta tipos de licitación, adjuntos, documentos solicitados,causas de desface y acceso a cotizaciones',
-      icon: "configuracion",
+      description:
+        'Ajusta tipos de licitación, adjuntos, documentos solicitados,causas de desface y acceso a cotizaciones',
+      icon: 'configuracion',
     },
 
     {
       title: 'Flujos y pasos de licitación',
       description: 'Crea flujos y configura sus pasos de una licitación',
-      icon: "flujo",
+      icon: 'flujo',
     },
-    
+
     {
       title: 'Perfiles de acceso',
-      description: 'Configura según el perfil del usuario los permisos a flujos de licitación.',
-      icon: "perfil",
+      description:
+        'Configura según el perfil del usuario los permisos a flujos de licitación.',
+      icon: 'perfil',
     },
 
     {
       title: 'Plantillas de notificaciones',
-      description: '---',
-      icon: "plantillas",
+      description: '- - -',
+      icon: 'plantillas',
     },
-  ]
+  ];
 }
-

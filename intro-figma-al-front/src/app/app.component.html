@@ -1,11 +1,25 @@
-<div class="card">
+<div class="d-flex justify-content-center pt-4">
+  <div class="banner d-flex justify-content-center align-items-center">
+    <div class="banner-container text-center">
+      <div class="banner-title">
+        <h3>Licitaciones</h3>
+      </div>
+      <div class="banner-description">
+        <h6>Configura todos los parámetros para generarlas correctamente</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <div class="card-container d-flex gap-6">
     @for(card of cards; track card ){
     <app-card
-
       [title]="card.title"
       [description]="card.description"
       [icon]="card.icon"
-            />
-
+    />
     }
   </div>
+</div>
+

@@ -8,10 +8,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AngularModule } from '@sinco/angular';
 import { CardComponent } from './card/card/card.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
+   
   
   ],
   imports: [
