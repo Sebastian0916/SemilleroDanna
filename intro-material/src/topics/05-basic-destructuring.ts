@@ -1,3 +1,4 @@
+//Desestructuración de objetos
 interface AudioPlayer{
     audioVolume:number;
     songDuration:number;
@@ -20,7 +21,13 @@ const audioPlayer:AudioPlayer = {
     }
 }
 
-const song = 'New song';
-const {song:anotherSong, songDuration:duration,details} = audioPlayer;
-const {author} = details;
+const {song:anotherSong, songDuration:duration,details} = audioPlayer; //se renombran song 
+const {year} = details;
+console.log(year);
 
+
+//Desestructuración de arreglos 
+
+   
+const [, , turnks ='not found']: string[]=['Goku','Vegeta','Trunk'];
+console.error('personaje 3:',turnks)
