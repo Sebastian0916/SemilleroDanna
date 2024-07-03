@@ -1,14 +1,14 @@
 
-<table mat-table [dataSource]="dataSource" >
+<table size="small" mat-table [dataSource]="dataSource" >
   <ng-container matColumnDef="nombre"  >
-    <th class="column_nombre" mat-header-cell *matHeaderCellDef>Nombre</th>
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
     <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
   </ng-container>
 
   <ng-container matColumnDef="habilitar">
     <th mat-header-cell *matHeaderCellDef>Habilitar</th>
     <td mat-cell *matCellDef="let element" >
-      <mat-slide-toggle class="slide_toggle" [checked]="element.Habilitar === 'activado'">
+      <mat-slide-toggle size="small" [checked]="element.Habilitar === 'activado'">
       </mat-slide-toggle>
     </td>
   </ng-container>
@@ -23,16 +23,16 @@
 
   <ng-container matColumnDef="adjuntos">
     <th mat-header-cell *matHeaderCellDef>Adjuntos</th>
-    <td mat-cell   *matCellDef="let element"  class="d-flex justify-content-center align-items-center " >
-      <mat-icon class="icon color-dark-primary-900 mat-icon-outlined " aria-hidden="false" aria-label="Example home icon" fontIcon="file_present">
+    <td mat-cell   *matCellDef="let element" >
+      <mat-icon size="medium" class="icon color-dark-primary-900 mat-icon-outlined " aria-hidden="false" aria-label="Example home icon" fontIcon="file_present">
       </mat-icon></td>
   </ng-container>
 
   <ng-container matColumnDef="acciones">
     <th mat-header-cell *matHeaderCellDef>Acciones</th>
     <td mat-cell *matCellDef="let element">
-      <mat-icon class="icon color-grey-900 mat-icon-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
-      <mat-icon class="icon color-grey-900 mat-icon-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
+      <mat-icon size="medium" class="color-grey-900 mat-icon-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="edit"></mat-icon>
+      <mat-icon size="medium" class="color-grey-900 mat-icon-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon>
     </td>
   </ng-container>
 

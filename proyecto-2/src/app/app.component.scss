@@ -1,12 +1,12 @@
 @import "../app/utilities/main.scss";
-.main_container1{
+.main_container{
     @include size(700px,42px);
 }
 
 .main_title{
     @include size(133px,22px);
 }
-.body1{
+.main_description{
     @include size(359px,20px);
 }
 
