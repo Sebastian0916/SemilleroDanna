@@ -1,20 +1,23 @@
+@import "../../utilities/main.scss";
 .slide_toggle{
-    width: 33px;
-    height: 22px;
+    @include size(33px,22px);
 }
 .icon{
     font-size: 16px;
 }
 
 .column_nombre{
-    width: 300px;
-    // height: 28px;
+    @include size(300px," ");
 }
 
 .mat-mdc-table .mdc-data-table__header-row {
-    height: 36px;
+    @include size(" ",36px);
+    background-color: rgb(250, 248, 248)
 }
 
 .mat-mdc-table .mdc-data-table__row {
-    height: 28px;
+
+    @include size(" ",28px);
+
 }
+

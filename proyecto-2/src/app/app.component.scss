@@ -1,18 +1,15 @@
+@import "../app/utilities/main.scss";
 .main_container1{
-    width: 700px;
-    height: 42px;
+    @include size(700px,42px);
 }
 
 .main_title{
-    width: 133px;
-    height: 22px;
+    @include size(133px,22px);
 }
 .body1{
-    width: 359px;
-    height: 20px;
+    @include size(359px,20px);
 }
 
 .table{
-    width: 700px;
-    height: 148px;
+    @include size(700px,148px);
 }
