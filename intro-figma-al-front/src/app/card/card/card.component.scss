@@ -2,25 +2,25 @@
 
 
 mat-divider {
-  @include tamaño(2px, 22px);
+  @include size(2px, 22px);
 }
 
 .card {
-  @include tamaño(360px, 137px);
+  @include size(360px, 137px);
   
   &__container-text {
-  @include tamaño(328px, 75px);
+  @include size(328px, 75px);
 
   }
 
   &__description {
     font-size: $small-font;
-  @include tamaño(230px, 48px);
+  @include size(230px, 48px);
 
   }
 
   &__img {
-  @include tamaño(86px, 75px);
+  @include size(86px, 75px);
 
   }
 }
