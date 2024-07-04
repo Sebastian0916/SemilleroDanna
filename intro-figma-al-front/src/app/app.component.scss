@@ -1,22 +1,21 @@
+@import"./utilities/main.scss";
+
 .banner {
-  display: flex;
-  width: 1128px;
-  height: 100px;
-  background-image: url(/assets/icons/BannerBackground.svg);
-  .banner-title {
-    color: #2063a0;
-    font-size: 28px;
+  @include size(1128px, 100px);
+  background-image: url("/assets/icons/BannerBackground.svg") ;
+
+  &__title {
+    color: $color-text-banner;
+    font-size: $large-font;
     font-weight: 600;
   }
 
-  .banner-description {
-    color: #2063a0;
-    font-size: 16px;
+  &__description {
+    color: $color-text-banner;
+    font-size: $medium-font;
   }
 }
 
-.card-container {
-  display: flex;
-  width: 1128px;
-  height: 298px;
+.content {
+  @include size(1128px,auto)
 }
