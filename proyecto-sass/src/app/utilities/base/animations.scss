@@ -1,0 +1,34 @@
+@import "../abstracts/mixins.scss";
+
+@keyframes moveInleft {
+    0% {
+      @include animation(0,translateX(-6.25rem));
+    }
+    80% {
+      @include animation(" ",translateX(0.625rem));
+    }
+    100% {
+      @include animation(1,translate(0));
+    }
+  }
+  
+  @keyframes moveInright {
+    0% {
+      @include animation(0,translateX(100px));
+    }
+    80% {
+      @include animation(" ",translateX(-10px));
+    }
+    100% {
+      @include animation(1,translate(0));
+    }
+  }
+  
+  @keyframes moveInBotton {
+    0% {
+      @include animation(0,translateY(1.0875rem));
+    }
+    100% {
+      @include animation(1,translateY(0));
+    }
+  }

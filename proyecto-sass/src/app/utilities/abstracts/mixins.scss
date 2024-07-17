@@ -1,0 +1,23 @@
+@mixin size($width,$height){
+    width: $width;
+    height: $height;
+}
+@mixin animation($opacity,$tranform){
+    opacity:$opacity;
+    transform:$tranform;
+}
+
+@mixin clearfix {
+    &::after{
+        content: "";
+        display: table;
+        clear: both;    
+    }
+}
+
+@mixin absCenter{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
