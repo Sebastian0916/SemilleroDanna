@@ -1,0 +1,27 @@
+<div>
+  <div class="row full-width ">
+    <mat-card class="mat-elevation-z1">
+      <mat-card-content class="column gap-4">
+        <div class="row p-1 gap-2">
+          <mat-divider
+            [vertical]="true"
+            class="bg-primary height"
+          ></mat-divider>
+          <h6 class="card__title color-text-primary">{{ title }}</h6>
+        </div>
+        <div class="card-container-text gap-3 row align-items-center">
+          <div>
+            <p
+              class="card__description mat-body2 color-text-secondary align-items-center d-flex"
+            >
+              {{ description }}
+            </p>
+          </div>
+          <div>
+            <img class="card-img" [src]="iconCard" alt="Icono" />
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

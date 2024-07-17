@@ -1,0 +1,41 @@
+
+<table size="small" mat-table [dataSource]="dataSource" >
+  <ng-container matColumnDef="nombre"  >
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="habilitar">
+    <th mat-header-cell *matHeaderCellDef>Habilitar</th>
+    <td mat-cell *matCellDef="let element" >
+      <mat-slide-toggle size="small" [checked]="element.Habilitar === 'activado'">
+      </mat-slide-toggle>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="obligatorio">
+    <th mat-header-cell *matHeaderCellDef>Obligatorio</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-slide-toggle [checked]="element.obligatorio === 'activado'">
+      </mat-slide-toggle>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="adjuntos">
+    <th mat-header-cell *matHeaderCellDef>Adjuntos</th>
+    <td mat-cell   *matCellDef="let element" >
+      <mat-icon size="medium" class="icon color-dark-primary-900 mat-icon-outlined " aria-hidden="false"  fontIcon="file_present">
+      </mat-icon></td>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon size="medium" class="color-grey-900 mat-icon-outlined" aria-hidden="false"  fontIcon="edit"></mat-icon>
+      <mat-icon size="medium" class="color-grey-900 mat-icon-outlined" aria-hidden="false"  fontIcon="delete"></mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

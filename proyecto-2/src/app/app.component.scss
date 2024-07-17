@@ -1,0 +1,15 @@
+@import "../app/utilities/main.scss";
+.main_container{
+    @include size(700px,42px);
+}
+
+.main_title{
+    @include size(133px,22px);
+}
+.main_description{
+    @include size(359px,20px);
+}
+
+.table{
+    @include size(700px,148px);
+}

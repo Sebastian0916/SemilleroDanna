@@ -1,0 +1,21 @@
+@import"./utilities/main.scss";
+
+.banner {
+  @include size(1128px, 100px);
+  background-image: url("/assets/icons/BannerBackground.svg") ;
+
+  &__title {
+    color: $color-text-banner;
+    font-size: $large-font;
+    font-weight: 600;
+  }
+
+  &__description {
+    color: $color-text-banner;
+    font-size: $medium-font;
+  }
+}
+
+.content {
+  @include size(1128px,auto)
+}

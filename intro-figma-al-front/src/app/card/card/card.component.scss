@@ -1,0 +1,26 @@
+@import '../../utilities/main.scss';
+
+
+mat-divider {
+  @include size(2px, 22px);
+}
+
+.card {
+  @include size(360px, 137px);
+  
+  &__container-text {
+  @include size(328px, 75px);
+
+  }
+
+  &__description {
+    font-size: $small-font;
+  @include size(230px, 48px);
+
+  }
+
+  &__img {
+  @include size(86px, 75px);
+
+  }
+}
