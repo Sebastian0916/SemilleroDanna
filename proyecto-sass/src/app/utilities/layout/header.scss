@@ -1,0 +1,25 @@
+
+.header {
+    @include size(" ", 95vh);
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+      ),
+      url("../../../assets/imagenes/hero.jpg");
+    opacity: $opacity;
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    
+    &__logo {
+      @include size(" ", 2.1875rem);
+      top: 2.5rem;
+      left: 2.5rem;
+    }
+  
+    &__text-box {
+      transform: translate(-50%, -50%);
+      top: 40%;
+      left: 50%;
+    }
+    
+  }

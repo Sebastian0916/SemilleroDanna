@@ -1,0 +1,50 @@
+
+.heading-primary {
+  color: white;
+    &--main {
+      color: $color-white;
+      font-size: 3.75rem;
+      font-weight: 400;
+      letter-spacing:2.1875rem;
+      animation-name: moveInleft;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+    }
+  
+    &--sub {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: 1.0875rem;
+      animation: moveInRight 1s ease-out ;
+    }
+  }
+
+.heading-secondary{
+    font-size: 1.8rem;
+    font-weight: 700;
+    background-image: linear-gradient(to right,$color-primary-light,$color-primary-dark);
+    background-clip: text;
+    color: transparent;
+    letter-spacing: .2rem;
+    transition: all .2s;
+    padding: .5rem;
+    
+
+    &:hover{
+        transform: skewY(2deg) skewX(15deg) scale(1.1);
+        text-shadow: .5rem 1rem 2rem rgba($color-black, .2);
+    }
+}
+
+.heading-tertiary{
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.paragraph{
+  font-size: 1rem;
+
+  &:not(:last-child){
+    margin-bottom: 1.5rem;
+  }
+}
