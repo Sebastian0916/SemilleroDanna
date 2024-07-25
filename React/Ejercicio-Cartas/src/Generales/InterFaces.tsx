@@ -1,4 +1,6 @@
+import { ReactNode } from 'react';
 export interface ModeloCarta{
     titulo:string;
-    descripcion:string;
+
+    children: ReactNode;
 }

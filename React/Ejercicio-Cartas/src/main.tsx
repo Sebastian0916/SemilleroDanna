@@ -8,8 +8,8 @@ import { SincoTheme } from "@sinco/react";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider theme={SincoTheme}>
     <React.StrictMode>
-      <VistaCarta titulo="Prueba" descripcion="Prueba componente">
-        
+      <VistaCarta titulo="Prueba" >
+        <p>asdfghjkl</p>
       </VistaCarta>
     </React.StrictMode>
   </ThemeProvider>
