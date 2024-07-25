@@ -54,7 +54,7 @@ export const PrimerVista: React.FC = () => {
               backgroundColor: "grey.50",
               display: "flex",
               justifyContent: "center",
-              border: "2px dotted #f0f0f0"
+              border: "2px dotted `${SincoTheme.palette.grey[50]` "
             }}
           >
             <Box
@@ -95,7 +95,7 @@ export const PrimerVista: React.FC = () => {
                   cargarlo desde tu PC
                 </Typography>
               </Box>
-              <Button variant="outlined" endIcon={<AttachFile />}>
+              <Button variant="outlined" endIcon={<AttachFile />} size="small">
                 Adjuntar archivo{" "}
               </Button>
             </Box>
