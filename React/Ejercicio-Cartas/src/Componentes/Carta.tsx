@@ -10,10 +10,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
-import ContentCopyOutlinedIcon from "@mui/icons-material/ContentCopyOutlined";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { WarningAmberOutlined, ContentCopyOutlined,EditOutlined,DeleteOutlineOutlined} from '@mui/icons-material';
+
+
 import { ModeloCartas } from "../Generales/constantes";
 
 export const VistaCarta = () => {
@@ -34,13 +33,13 @@ export const VistaCarta = () => {
             action={
               <Box display={"flex"} gap={1}>
                 <IconButton size="small">
-                  <ContentCopyOutlinedIcon fontSize="small" />
+                  <ContentCopyOutlined fontSize="small" />
                 </IconButton>
                 <IconButton size="small">
-                  <EditOutlinedIcon fontSize="small" />
+                  <EditOutlined fontSize="small" />
                 </IconButton>
                 <IconButton size="small">
-                  <DeleteOutlineOutlinedIcon fontSize="small" />
+                  <DeleteOutlineOutlined fontSize="small" />
                 </IconButton>
               </Box>
             }
@@ -62,7 +61,7 @@ export const VistaCarta = () => {
           </CardContent>
           <Divider />
           <CardActions sx={{ display: "flex", flexDirection: "row-reverse" }}>
-              <Button startIcon={index < 3 ? <WarningAmberOutlinedIcon sx={{ color: 'orange' }}/> : null}>
+              <Button startIcon={index < 3 ? <WarningAmberOutlined sx={{ color: 'warning.main' }}/> : null}>
                 {ModeloCarta.cantidaPasos} Pasos creados
               </Button>
             </CardActions>
