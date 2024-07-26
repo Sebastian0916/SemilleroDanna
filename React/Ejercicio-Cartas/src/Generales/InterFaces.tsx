@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
-export interface ModeloCarta{
-    titulo:string;
-
-    children: ReactNode;
+export interface ModeloCarta {
+  titulo: string;
+  descripcion: string;
+  cantidaPasos: number;
 }
