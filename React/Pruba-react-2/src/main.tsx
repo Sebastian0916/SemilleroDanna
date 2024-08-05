@@ -1,16 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Carta } from "./components/carta";
+import { SincoTheme } from "@sinco/react";
+import { ThemeProvider } from "@mui/material";
 
-import './index.css'
-import { Carta } from './components/carta'
-import { ThemeProvider } from '@mui/material'
-import { SincoTheme } from '@sinco/react'
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <ThemeProvider theme={SincoTheme}>
-
-  <React.StrictMode>
-    <Carta/>
-  </React.StrictMode>
+    <React.StrictMode>
+      <Carta />
+    </React.StrictMode>
   </ThemeProvider>
-)
+);
