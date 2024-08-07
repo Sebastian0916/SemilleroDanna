@@ -20,7 +20,7 @@ export const AdjuntarArchivo = () => {
     },
   });
 
-  useEffect(() => {
+    useEffect(() => {
     const intervals: Map<string, number> = new Map();
 
     uploadingFiles.forEach((_, fileName) => {
@@ -42,7 +42,7 @@ export const AdjuntarArchivo = () => {
     };
   }, [uploadingFiles]);
 
-  const handleDelete = (name: string) => {
+  const Delete = (name: string) => {
     setFiles((prevFiles) => prevFiles.filter((x) => x.name !== name));
     setUploadingFiles((prev) => {
       const updated = new Map(prev);
@@ -51,6 +51,34 @@ export const AdjuntarArchivo = () => {
     });
   };
 
+  const handleReplace = (name: string) => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*, .docx, .xml, .png, .jpg';
+
+    fileInput.onchange = (x) => {
+      if (x.target instanceof HTMLInputElement){
+        const file = x.target.files?.[0];
+        if (file){
+          setFiles((prevFiles) =>{
+            return prevFiles.map(f => f.name === name ? file : f);
+          });
+
+          setUploadingFiles(prev =>{
+            const updated = new Map(prev);
+            updated.set(name,0)
+            return updated;
+          });
+
+          const newFiles = {[file.name]: 0};
+          setUploadingFiles(new Map([...uploadingFiles, ...Object.entries(newFiles)]));
+        }
+      }
+    };
+  
+    fileInput.click()
+
+  };
   return (
     <Stack alignItems="center" bgcolor="background.default" height="100vh" width='100%' gap={1}>
       <Stack
@@ -118,14 +146,14 @@ export const AdjuntarArchivo = () => {
               {uploadingFiles.get(file.name) === 100 ? (
                 <>
                   <IconButton size="small" >
-                    <SyncOutlined fontSize="small" />
+                    <SyncOutlined fontSize="small"  onClick={() => handleReplace(file.name)}/>
                   </IconButton>
-                  <IconButton size="small" onClick={() => handleDelete(file.name)}>
+                  <IconButton size="small" onClick={() => Delete(file.name)}>
                     <DeleteOutlineOutlined fontSize="small" />
                   </IconButton>
                 </>
               ) : (
-                <Button size="small" onClick={() => handleDelete(file.name)}>
+                <Button size="small" onClick={() => Delete(file.name)}>
                   <CancelOutlined fontSize="small" />          
                 </Button>
               )}
