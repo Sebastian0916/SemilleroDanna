@@ -5,12 +5,13 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Chip,
   Divider,
   IconButton,
   Stack,
   Typography,
 } from "@mui/material";
-import { WarningAmberOutlined, ContentCopyOutlined,EditOutlined,DeleteOutlineOutlined} from '@mui/icons-material';
+import { WarningAmberOutlined, ContentCopyOutlined,EditOutlined,DeleteOutlineOutlined, CancelOutlined} from '@mui/icons-material';
 
 
 import { ModeloCartas } from "../Generales/constantes";
@@ -64,6 +65,7 @@ export const VistaCarta = () => {
               <Button startIcon={index < 3 ? <WarningAmberOutlined sx={{ color: 'warning.main' }}/> : null}>
                 {ModeloCarta.cantidaPasos} Pasos creados
               </Button>
+              <Chip sx={{background:"grey.100"}} icon={< CancelOutlined/>} label="With Icon" />
             </CardActions>
         </Card>
       ))}
