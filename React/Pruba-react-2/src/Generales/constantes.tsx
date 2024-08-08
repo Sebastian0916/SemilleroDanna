@@ -9,11 +9,7 @@ export const ModeloCartas: ModeloCarta[] = [
     direccion: "Carrera 75 # 9 79",
     telefono: "57(601)6827063",
     cantidadTrabajadores: 26,
-    imagen: "../assets/imagenes/_Avatar_.svg",
-   
-  
-
-
+    imagen: "../src/assets/imagenes/_Avatar_xd.svg",
   },
   {
     titulo: "Pinturas y Acabados SA",
@@ -23,7 +19,7 @@ export const ModeloCartas: ModeloCarta[] = [
     direccion: "Carrera 75 # 9 79",
     telefono: "57(601)6827063",
     cantidadTrabajadores: 26,
-    imagen: "../assets/imagenes/_Avatar_ (1).svg",
+    imagen: "../src/assets/imagenes/_Avatar_ (1).svg",
    
   },
   {

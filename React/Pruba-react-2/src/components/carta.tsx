@@ -24,10 +24,11 @@ import {
   ModeEditOutlineOutlined,
   SupervisedUserCircleOutlined,
 } from "@mui/icons-material";
+import { SincoTheme } from "@sinco/react";
 
 export const Carta = () => {
   return (
-    <Box display="flex" flexWrap="wrap" justifyContent="center" gap={2}>
+    <Box display="flex" flexWrap="wrap" justifyContent="center" gap={2} sx={{backgroundColor:"background.default"}}>
       {ModeloCartas.map((ModeloCarta, index) => (
         <Card
           key={index}
@@ -108,7 +109,9 @@ export const Carta = () => {
           >
             <Stack direction="row" alignItems="center" spacing={1}>
               <Chip
-                sx={{ background: "grey.100" }}
+                sx={{
+                  backgroundColor: `${SincoTheme.palette.grey[100]}!important`,
+                }}
                 size="small"
                 variant="filled"
                 icon={
@@ -120,12 +123,9 @@ export const Carta = () => {
                 label="Trabajadores"
               />
               <Chip
-                sx={{ background: "grey.100" }}
                 size="small"
                 variant="filled"
-                icon={
-                  <CheckCircleOutlineOutlined fontSize="small" color="action" />
-                }
+                icon={<CheckCircleOutlineOutlined fontSize="small" />}
                 label="Al día"
               />
             </Stack>
