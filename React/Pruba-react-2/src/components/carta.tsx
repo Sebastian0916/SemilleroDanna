@@ -24,17 +24,17 @@ import {
   ModeEditOutlineOutlined,
   SupervisedUserCircleOutlined,
 } from "@mui/icons-material";
-import { SincoTheme } from "@sinco/react";
 
 export const Carta = () => {
   return (
-    <Stack direction="row" gap={2} flexWrap="wrap" justifyContent="center">
+    <Box display="flex" flexWrap="wrap" justifyContent="center" gap={2}>
       {ModeloCartas.map((ModeloCarta, index) => (
         <Card
           key={index}
           sx={{
             width: "20.458rem",
             height: "12.25rem",
+            marginBottom: "1rem",
           }}
         >
           <CardHeader
@@ -42,7 +42,6 @@ export const Carta = () => {
               <Box display="flex" alignItems="center">
                 <Box>
                   <img src={ModeloCarta.imagen} alt="img" />
-                  {/* y el texto alternativo ? en caso que no cargue la img */}
                 </Box>
                 <Box marginLeft={1}>
                   <Typography
@@ -109,7 +108,7 @@ export const Carta = () => {
           >
             <Stack direction="row" alignItems="center" spacing={1}>
               <Chip
-                sx={{ backgroundColor: SincoTheme.palette.grey[100] }}
+                sx={{ background: "grey.100" }}
                 size="small"
                 variant="filled"
                 icon={
@@ -120,19 +119,15 @@ export const Carta = () => {
                 }
                 label="Trabajadores"
               />
-
-
-              { <Chip
-              sx={{
-                backgroundColor: `SincoTheme.palette.grey[100] !important`,
-              }}
-              size="small"
-              variant="filled"
-              icon={
-                <CheckCircleOutlineOutlined fontSize="small" color="action" />
-              }
-              label="Al dia"
-            /> }
+              <Chip
+                sx={{ background: "grey.100" }}
+                size="small"
+                variant="filled"
+                icon={
+                  <CheckCircleOutlineOutlined fontSize="small" color="action" />
+                }
+                label="Al día"
+              />
             </Stack>
 
             <Stack direction="row" alignItems="center" spacing={1}>
@@ -149,6 +144,6 @@ export const Carta = () => {
           </CardActions>
         </Card>
       ))}
-    </Stack>
+    </Box>
   );
 };
