@@ -1,5 +1,5 @@
+import { useState } from 'react';
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
 import Modal from '@mui/material/Modal';
 const style = {
     position: 'absolute' ,
@@ -14,16 +14,20 @@ const style = {
   };
   
   export default function BasicModal() {
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [open, setOpen] = useState<boolean>(false);
+    // const handleOpen = () => setOpen(true);
+    // const handleClose = () => setOpen(false);
   
+    const isOpenModal = () =>{
+      setOpen(prevOpen => !prevOpen)
+    }
+
     return (
       <div>
-        <Button onClick={handleOpen}>Open modal</Button>
+        <Button onClick={isOpenModal}>Open modal</Button>
         <Modal
           open={open}
-          onClose={handleClose}
+          onClose={isOpenModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
