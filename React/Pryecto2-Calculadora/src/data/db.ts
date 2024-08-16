@@ -1,6 +1,6 @@
-import type {MenuItem2} from "../types"
+import type {MenuItem} from "../types"
 
-export const menuItems: MenuItem2[] = [
+export const menuItems: MenuItem[] = [
   {
     id: 1,
     name: "Pizza a la Leña Chica",
