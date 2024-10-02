@@ -1,0 +1,14 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './index.css'
+import { ThemeProvider } from '@mui/material'
+import { SincoTheme } from '@sinco/react'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <ThemeProvider theme={SincoTheme}>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  </ThemeProvider>
+)
