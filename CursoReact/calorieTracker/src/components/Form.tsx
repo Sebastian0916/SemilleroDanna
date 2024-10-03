@@ -27,8 +27,10 @@ export default function Form() {
   const handlechange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
   ) => {
-    const isNumberField = ["category", "calories"].includes(e.target.id);
-
+    const isNumberField = ["category", "calories"].includes(e.target.id); //se utiliza para mostrar el valor
+    
+    console.log(e.target.value);
+    
     setActivity({
       ...activity,
       [e.target.id]: isNumberField ? +e.target.value : e.target.value, // busca cada una y les da un valor

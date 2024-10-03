@@ -16,7 +16,6 @@ type ActivityContexProps ={
     categoryName: (category: Activity["category"]) => string[]
     isEmptyActivities:boolean
 
-    
 }
 
 

@@ -33,7 +33,7 @@ export const activityReducer =(
         if(state.activeId){
             updatedActivities=state.activities.map(activity=>activity.id=== state.activeId?action.payload.newActivity:activity)
         }else{
-            updatedActivities = [...state.activities, action.payload.newActivity]
+            updatedActivities = [...state.activities, action.payload.newActivity] // recupera los datos con action.payload y el nombre del payload
         }
         return{
             ...state,
