@@ -1,0 +1,54 @@
+{
+  "empleados": [
+    {
+      "nombre": "Juan",
+      "apellidos": "Pérez García",
+      "edad": 35,
+      "genero": "Masculino",
+      "cedula": "123456789",
+      "estadoCivil": "Soltero",
+      "tipoContrato": "Indefinido",
+      "salario": 3500
+    },
+    {
+      "nombre": "María",
+      "apellidos": "Rodríguez López",
+      "edad": 28,
+      "genero": "Femenino",
+      "cedula": "987654321",
+      "estadoCivil": "Casada",
+      "tipoContrato": "Temporal",
+      "salario": 2800
+    },
+    {
+      "nombre": "Carlos",
+      "apellidos": "Fernández Torres",
+      "edad": 40,
+      "genero": "Masculino",
+      "cedula": "123789456",
+      "estadoCivil": "Divorciado",
+      "tipoContrato": "Indefinido",
+      "salario": 4500
+    },
+    {
+      "nombre": "Lucía",
+      "apellidos": "Martínez Gómez",
+      "edad": 32,
+      "genero": "Femenino",
+      "cedula": "321654987",
+      "estadoCivil": "Soltera",
+      "tipoContrato": "Temporal",
+      "salario": 3000
+    },
+    {
+      "nombre": "Javier",
+      "apellidos": "Gómez Ruiz",
+      "edad": 45,
+      "genero": "Masculino",
+      "cedula": "654987321",
+      "estadoCivil": "Viudo",
+      "tipoContrato": "Indefinido",
+      "salario": 5000
+    }
+  ]
+}

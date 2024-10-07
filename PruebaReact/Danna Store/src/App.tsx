@@ -1,13 +1,18 @@
 
+import { QueryClient, QueryClientProvider } from "react-query";
+import PaginaPrincipal from "./components/PaginaPrincipal";
 
-function App() {
-  
 
+
+const queryClient = new QueryClient
+
+function App() {  
   return (
-    <>
-     <h1></h1>
-    </>
-  )
+    <QueryClientProvider client={queryClient}>
+     <PaginaPrincipal/>
+    </QueryClientProvider>
+   
+  );
 }
 
-export default App
+export default App;
