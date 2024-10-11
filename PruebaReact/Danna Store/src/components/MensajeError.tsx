@@ -1,26 +1,30 @@
+import { CloseOutlined, Info } from "@mui/icons-material";
 import {
   Box,
   Button,
-  Dialog,
-  DialogActions,
-  DialogTitle,
   Divider,
   IconButton,
-  Stack,
+  Modal,
   Typography,
 } from "@mui/material";
 import React from "react";
-import { Close, Info } from "@mui/icons-material";
 
-const emails = ["username@gmail.com", "user02@gmail.com"];
-
-export interface SimpleDialogProps {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+};
+export interface MensajeErrorProps {
   open: boolean;
   selectedValue: string;
   onClose: (value: string) => void;
 }
 
-function SimpleDialog(props: SimpleDialogProps) {
+export default function MensajeError(props:MensajeErrorProps) {
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -28,112 +32,53 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   return (
-    <Stack sx={{width:400,height:48}}>
-      <Dialog onClose={handleClose} open={open}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <IconButton>
-              <Info />
-            </IconButton>
-            <DialogTitle>¿Estás seguro/a?</DialogTitle>
-          </Box>
-          <IconButton
-            onClick={handleClose}
-            sx={{
-              "&:focus": {
-                outline: "none",
-              },
-            }}
-          >
-            <Close />
-          </IconButton>
-        </Box>
-        <Divider />
-        <Stack sx={{width:400,height:48, }}>
-            <Box>
-            <Typography variant="body2">
-            Por favor, confirma que deseas eliminar el empleado. Esta acción no
-            se puede deshacer.
-          </Typography>
-            </Box>
-        </Stack>
-        <DialogActions>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginTop: 0,
-              marginBottom: 0,
-            }}
-          >
-            <Button
-              variant="outlined"
-              sx={{
-                marginRight: 1,
-                "&:focus": {
-                  outline: "none",
-                },
-              }}
-            >
-              Cancelar
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                marginRight: 2,
-                "&:focus": {
-                  outline: "none",
-                },
-              }}
-            >
-              Editar
-            </Button>
-          </Box>
-        </DialogActions>
-      </Dialog>
-    </Stack>
-  );
-}
-
-export default function MensajeError() {
-  const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value: string) => {
-    setOpen(false);
-    setSelectedValue(value);
-  };
-
-  return (
-    <div>
-      <br />
-      <Button
-        variant="outlined"
-        onClick={handleClickOpen}
-        sx={{
-          "&:focus": {
-            outline: "none",
-          },
-        }}
-      >
-        Open simple dialog
-      </Button>
-      <SimpleDialog
-        selectedValue={selectedValue}
+    <Box>
+      <Modal
         open={open}
         onClose={handleClose}
-      />
-    </div>
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            padding={"8px 24px"}
+          >
+            <Box display="flex" alignItems="center" gap={2}>
+              <Info color="error" />
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                ¿Estás seguro/a?
+              </Typography>
+            </Box>
+            <IconButton onClick={handleClose}>
+              <CloseOutlined color="action"/>
+            </IconButton>
+          </Box>
+          <Divider />
+
+          <Box padding={"8px 24px"}>
+            <Typography variant="body2">
+              Por favor, confirma que deseas eliminar el empleado. Esta acción
+              no se puede deshacer.
+            </Typography>
+          </Box>
+          <Divider />
+
+          <Box
+            sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}
+            padding={"8px 8px"}
+          >
+            <Button variant="text" size="small" color='inherit'onClick={handleClose}>
+              Cancelar
+            </Button>
+            <Button variant="contained" color="error" size="small" onClick={handleClose}>
+              Aceptar
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+    </Box>
   );
 }

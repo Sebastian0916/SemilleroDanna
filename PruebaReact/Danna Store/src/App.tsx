@@ -1,17 +1,10 @@
-
-import { QueryClient, QueryClientProvider } from "react-query";
-import PaginaPrincipal from "./components/PaginaPrincipal";
-
+// import { QueryClient, QueryClientProvider } from "react-query";
+import Principal from "./vista/Principal";
 
 
-const queryClient = new QueryClient
-
-function App() {  
+function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-     <PaginaPrincipal/>
-    </QueryClientProvider>
-   
+      <Principal />
   );
 }
 

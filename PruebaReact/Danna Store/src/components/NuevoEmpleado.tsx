@@ -2,26 +2,27 @@ import {
   Box,
   Button,
   Dialog,
+  DialogActions,
+  DialogContent,
   DialogTitle,
+  FormControl,
   IconButton,
+  InputLabel,
   MenuItem,
   Select,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
 import { Close } from "@mui/icons-material";
 
-const emails = ["username@gmail.com", "user02@gmail.com"];
-
-export interface SimpleDialogProps {
+export interface NuevoEmpleadoProps {
   open: boolean;
   selectedValue: string;
   onClose: (value: string) => void;
 }
 
-function SimpleDialog(props: SimpleDialogProps) {
+export function NuevoEmpleado(props: NuevoEmpleadoProps) {
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -29,164 +30,145 @@ function SimpleDialog(props: SimpleDialogProps) {
   };
 
   return (
-    <Stack>
-      <Dialog onClose={handleClose} open={open}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "16px 24px",
-          }}
-        >
-          <DialogTitle>Nuevo empleado</DialogTitle>
-          <IconButton
-            onClick={handleClose}
-            sx={{
-              "&:focus": {
-                outline: "none",
-              },
-            }}
-          >
-            <Close />
-          </IconButton>
+    <Dialog
+      onClose={handleClose}
+      open={open}
+      PaperProps={{ sx: { minWidth: "680px" } }}
+    >
+      <DialogTitle
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <img
+            src="./public/div/div/Ilustraciones.svg"
+            alt="icono"
+            style={{ width: 52, height: 44 }}
+          />
+          <Typography>Información del empleado</Typography>
         </Box>
-        <Stack sx={{ padding: "3px 55px" }}>
-          <Box sx={{ marginBottom: 3 }}>
-            <Typography
-              variant="subtitle1"
-              sx={{ fontWeight: "bold", color: "primary.main" }}
-            >
-              Info Básica
-            </Typography>
-          </Box>
+        <IconButton onClick={handleClose}>
+          <Close color="action" />
+        </IconButton>
+      </DialogTitle>
 
-          <Box sx={{ display: "flex" }}>
+      <DialogContent>
+        <Stack gap={1} padding={"12px 16px 8px 16px "}>
+          <Box sx={{ display: "flex", gap: 1 }}>
             <TextField
               id="outlined-basic"
-              label="Outlined"
+              label="Nombres"
               variant="outlined"
               size="small"
-              sx={{ width: 240, paddingRight: 1 }}
+              fullWidth
             />
             <TextField
               id="outlined-basic"
-              label="Outlined"
+              label="Apellidos"
               variant="outlined"
               size="small"
-              sx={{ width: 240, paddingRight: 1 }}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Outlined"
-              size="small"
-              variant="outlined"
-              sx={{ width: 240 }}
+              fullWidth
             />
           </Box>
 
-          <Box sx={{ display: "flex", marginTop: 2, marginBottom: 2 }}>
+          <Box sx={{ display: "flex", gap: 1 }}>
             <TextField
               id="outlined-basic"
-              label="Outlined"
+              label="Documento"
               variant="outlined"
               size="small"
-              sx={{ width: 240, paddingRight: 1 }}
+              fullWidth
             />
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-small"
+            <TextField
+              id="outlined-basic"
+              label="Edad"
+              variant="outlined"
               size="small"
-              label="Genero"
-              sx={{ width: 240 }}
-            >
-              <MenuItem value={10}>Soltera</MenuItem>
-              <MenuItem value={20}>Casado</MenuItem>
-              <MenuItem value={30}>Viudo</MenuItem>
-            </Select>
+              fullWidth
+            />
+          </Box>
 
-            <Select
-              labelId="demo-select-small-label"
-              id="demo-select-small"
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <FormControl fullWidth >
+              <InputLabel id="demo-simple-select-label">Género</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Género"
+                size="small"
+              >
+                <MenuItem value={1}>Masculino</MenuItem>
+                <MenuItem value={2}>Femenino</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth >
+              <InputLabel id="demo-simple-select-label">Estado Civil</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Estado Civil"
+                size="small"
+              >
+                <MenuItem value={1}>Soltero</MenuItem>
+                <MenuItem value={2}>Casado</MenuItem>
+                <MenuItem value={3}>Viudo</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <TextField
+              id="outlined-basic"
+              label="Salario"
+              variant="outlined"
               size="small"
-              label="Estado Civil"
-              sx={{ width: 240 }}
-            >
-              <MenuItem value={10}>Soltera</MenuItem>
-              <MenuItem value={20}>Casado</MenuItem>
-              <MenuItem value={30}>Viudo</MenuItem>
-            </Select>
+              fullWidth
+            />
+             <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Tipo de contrato</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Tipo de contrato"
+                size="small" 
+                
+
+              >
+                <MenuItem value={1}>Definido</MenuItem>
+                <MenuItem value={2}>Indefinido</MenuItem>
+                
+              </Select>
+            </FormControl>
           </Box>
         </Stack>
+      </DialogContent>
+
+      <DialogActions>
         <Box
           sx={{
             display: "flex",
             justifyContent: "flex-end",
-            marginTop: 2,
-            marginBottom: 2,
+            padding: "12px,16px",
+            gap: 2,
           }}
         >
-          <Button
-            variant="outlined"
-            sx={{
-              marginRight: 1,
-              "&:focus": {
-                outline: "none",
-              },
-            }}
-          >
+          <Button variant="text" size="small" onClick={() => handleClose()}>
             Cancelar
           </Button>
           <Button
             variant="contained"
             color="primary"
-            sx={{
-              marginRight: 2,
-              "&:focus": {
-                outline: "none",
-              },
-            }}
+            size="small"
+            onClick={() => handleClose()}
           >
-            Editar
+            Guardar
           </Button>
         </Box>
-      </Dialog>
-    </Stack>
-  );
-}
-
-export default function SimpleDialogDemo() {
-  const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(emails[1]);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (value: string) => {
-    setOpen(false);
-    setSelectedValue(value);
-  };
-
-  return (
-    <div>
-      <br />
-      <Button
-        variant="outlined"
-        onClick={handleClickOpen}
-        sx={{
-          "&:focus": {
-            outline: "none",
-          },
-        }}
-      >
-        Open simple dialog
-      </Button>
-      <SimpleDialog
-        selectedValue={selectedValue}
-        open={open}
-        onClose={handleClose}
-      />
-    </div>
+      </DialogActions>
+    </Dialog>
   );
 }
