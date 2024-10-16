@@ -1,10 +1,11 @@
 export interface Empleado {
-    cedula: string;          
-    nombre: string;   
+    documento: string;          
+    nombres: string;   
     apellidos:string;
     edad:number;
-    genero:string;
+    genero:number;
     salario:number;
-    estadoCivil:string     
+    estadoCivil:number
+    tipoContrato:number     
   }
 

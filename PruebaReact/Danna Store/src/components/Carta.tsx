@@ -21,9 +21,10 @@ import { Empleado } from "../interface/empleado";
 
 interface CartaProps {
   empleado: Empleado;
+  onDelete: (empleadoDocumento: string) => void; // Agregar esta propiedad
 }
 
-export const Carta = ({ empleado }: CartaProps) => {
+export const Carta = ({ empleado, onDelete }: CartaProps) => {
   const [edicionEmpleado, setEdicionEmpleado] = useState(false);
   const [detalleEmpleado, setDetalleEmpleado] = useState(false);
   const [confirmacionEmpleado, setConfirmacionEmpleado] = useState(false);
@@ -40,6 +41,15 @@ export const Carta = ({ empleado }: CartaProps) => {
     setConfirmacionEmpleado(estaAbierto);
   };
 
+  const generarColorAleatorio = () => {
+    const letras = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letras[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
   return (
     <Stack width={321}>
       <Card>
@@ -51,13 +61,15 @@ export const Carta = ({ empleado }: CartaProps) => {
             justifyContent: "space-between",
           }}
           avatar={
-            <Avatar sx={{ width: 32, height: 32, alignSelf: "center" }}>
-              <Typography variant="subtitle1">JP</Typography>
+            <Avatar sx={{ width: 32, height: 32, alignSelf: "center", backgroundColor: generarColorAleatorio() }}>
+              <Typography variant="subtitle1">
+                {`${empleado.nombres.split(' ')[0][0]}${empleado.apellidos.split(' ')[0][0]}`.toUpperCase()}
+              </Typography>
             </Avatar>
           }
           title={
             <Typography variant="subtitle2">
-              {empleado.nombre} {empleado.apellidos}
+              {empleado.nombres} {empleado.apellidos}
             </Typography>
           }
           action={
@@ -88,7 +100,7 @@ export const Carta = ({ empleado }: CartaProps) => {
               <Typography variant="caption" color="text.secondary">
                 Número de documento
               </Typography>
-              <Typography variant="body2">{empleado.cedula}</Typography>
+              <Typography variant="body2">{empleado.documento}</Typography>
             </Box>
 
             <Box>
@@ -118,27 +130,34 @@ export const Carta = ({ empleado }: CartaProps) => {
           </Box>
         </CardActions>
       </Card>
+
       {edicionEmpleado && (
         <EditarEmpleado
           open={edicionEmpleado}
           onClose={() => abrirFormularioEditarEmpleado(false)}
-          selectedValue=""
+          selectedValue={empleado} // Cambiado para pasar el empleado
         />
       )}
+
       {detalleEmpleado && (
         <VerEmpleado
           open={detalleEmpleado}
           onClose={() => abrirFormularioDetalleEmpleado(false)}
-          selectedValue=""
+          selectedValue={empleado} // Cambiado para pasar el empleado
         />
       )}
-      {confirmacionEmpleado && (
-        <MensajeError
-          open={confirmacionEmpleado}
-          onClose={() => modalConfirmacion(false)}
-          selectedValue=""
-        />
-      )}
+
+{confirmacionEmpleado && (
+  <MensajeError
+    open={confirmacionEmpleado}
+    onClose={() => modalConfirmacion(false)} // Solo cerramos el modal
+    selectedValue={empleado}
+    funcionAceptar={() => {
+      onDelete(empleado.documento); // Aquí se llama a la función de eliminación
+      modalConfirmacion(false); // Cierra el modal después de aceptar
+    }}
+  />
+)}
     </Stack>
   );
 };

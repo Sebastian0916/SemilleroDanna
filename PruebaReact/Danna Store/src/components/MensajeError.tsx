@@ -7,7 +7,7 @@ import {
   Modal,
   Typography,
 } from "@mui/material";
-import React from "react";
+import { Empleado } from "../interface/empleado";
 
 const style = {
   position: "absolute",
@@ -18,17 +18,17 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
 };
+
 export interface MensajeErrorProps {
   open: boolean;
-  selectedValue: string;
-  onClose: (value: string) => void;
+  selectedValue: Empleado; 
+  onClose: () => void; // Cambiado para no recibir el parámetro
+  funcionAceptar: () => void; // Esta línea se mantiene
 }
 
-export default function MensajeError(props:MensajeErrorProps) {
-  const { onClose, selectedValue, open } = props;
-
+export default function MensajeError({ onClose, open, funcionAceptar }: MensajeErrorProps) {
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose(); // Solo llama a onClose sin parámetros
   };
 
   return (
@@ -53,7 +53,7 @@ export default function MensajeError(props:MensajeErrorProps) {
               </Typography>
             </Box>
             <IconButton onClick={handleClose}>
-              <CloseOutlined color="action"/>
+              <CloseOutlined color="action" />
             </IconButton>
           </Box>
           <Divider />
@@ -70,10 +70,10 @@ export default function MensajeError(props:MensajeErrorProps) {
             sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}
             padding={"8px 8px"}
           >
-            <Button variant="text" size="small" color='inherit'onClick={handleClose}>
+            <Button variant="text" size="small" color='inherit' onClick={handleClose}>
               Cancelar
             </Button>
-            <Button variant="contained" color="error" size="small" onClick={handleClose}>
+            <Button variant="contained" color="error" size="small" onClick={funcionAceptar}>
               Aceptar
             </Button>
           </Box>

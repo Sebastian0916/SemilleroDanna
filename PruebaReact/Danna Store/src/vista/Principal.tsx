@@ -1,23 +1,24 @@
-import {
-  Autocomplete,
+import { 
   Box,
   Button,
   Stack,
   TextField,
   Typography,
+  Autocomplete,
+  Grid,
 } from "@mui/material";
 import { Carta } from "../components/Carta";
 import { useEffect, useState } from "react";
 import { NuevoEmpleado } from "../components/NuevoEmpleado";
-import { Empleado } from "../interface/empleado";
-import {  EmptyState, SincoTheme } from "@sinco/react";
+import { Empleado } from "../interface/empleado"; 
+import { EmptyState, SincoTheme } from "@sinco/react";
 
 export default function Principal() {
   const [formulario, setFormulario] = useState(false);
   const [empleados, setEmpleados] = useState<Empleado[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [filtroCedula, setFiltroCedula] = useState<string | null>(null); // Estado para guardar el filtro seleccionado
+  const [filtroDocumento, setFiltroDocumento] = useState<string | null>(null);
 
   const abrirFormularioNuevoEmpleado = (estaAbierto: boolean) => {
     setFormulario(estaAbierto);
@@ -25,13 +26,8 @@ export default function Principal() {
 
   useEffect(() => {
     fetch("http://localhost:3004/empleados")
-      .then((response) => {
-       
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-
         setEmpleados(data);
         setLoading(false);
       })
@@ -41,10 +37,61 @@ export default function Principal() {
       });
   }, []);
 
-  // Filtrar empleados por cédula seleccionada en el Autocomplete
-  const empleadosFiltrados = filtroCedula
-    ? empleados.filter((empleado) => empleado.cedula === filtroCedula)
-    : empleados; // Si no hay filtro, mostrar todos los empleados
+  const agregarEmpleado = async (nuevoEmpleado: Empleado | null) => {
+    if (nuevoEmpleado) {
+      try {
+        const response = await fetch("http://localhost:3004/empleados", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(nuevoEmpleado),
+        });
+
+        if (response.ok) {
+          const empleadoGuardado = await response.json();
+          setEmpleados((prevEmpleados) => [...prevEmpleados, empleadoGuardado]);
+        } else {
+          throw new Error("No se pudo agregar el empleado.");
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          console.error(error.message);
+        } else {
+          console.error("Se produjo un error inesperado.");
+        }
+      }
+    }
+    setFormulario(false);
+  };
+
+  const eliminarEmpleado = async (empleadoDocumento: string) => {
+    try {
+      const response = await fetch(`http://localhost:3004/empleados/${empleadoDocumento}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setEmpleados((prevEmpleados) =>
+          prevEmpleados.filter((empleado) => empleado.documento !== empleadoDocumento)
+        );
+      } else {
+        throw new Error("No se pudo eliminar el empleado.");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("Se produjo un error inesperado.");
+      }
+    }
+  };
+
+  const empleadosFiltrados = filtroDocumento
+    ? empleados.filter((empleado) => empleado.documento === filtroDocumento)
+    : empleados;
+
+  const mostrarEmpleados = empleadosFiltrados.length > 0 ? empleadosFiltrados : empleados;
 
   return (
     <Stack bgcolor="background.default" height="100vh">
@@ -61,6 +108,7 @@ export default function Principal() {
           Danna's Store
         </Typography>
       </Stack>
+
       <Stack
         flexDirection={"row"}
         justifyContent={"space-between"}
@@ -81,15 +129,23 @@ export default function Principal() {
 
         <Box display={"flex"} gap={1} alignItems={"center"}>
           <Autocomplete
-            disablePortal
-            options={empleados.map((e) => e.cedula)}
-            sx={{ width: 300 }}
+            options={empleados.map((empleado) => empleado.documento)}
             renderInput={(params) => (
-              <TextField {...params} label="Filtrar por cédula de empleado" />
+              <TextField
+                {...params}
+                label="Filtrar por cédula de empleado"
+                variant="outlined"
+                size="small"
+                sx={{ width: 300 }}
+              />
             )}
-            onChange={(_, value) => setFiltroCedula(value)} // Actualizar el filtro cuando se selecciona un valor
+            onChange={(event, newValue) => {
+              setFiltroDocumento(newValue);
+            }}
+            value={filtroDocumento}
+            size="small"
           />
-
+          
           <Button
             variant="contained"
             color="primary"
@@ -100,38 +156,43 @@ export default function Principal() {
         </Box>
       </Stack>
 
-      <Box
-        display={"flex"}
-        p={2}
-        gap={2}
-        flexWrap={"wrap"}
-        justifyContent={"center"}
-      >
-        {!loading &&
-          empleadosFiltrados.length > 0 &&
-          empleadosFiltrados.map((empleado) => (
-            <Carta key={empleado.cedula} empleado={empleado} />
-          ))}
+      <Grid container spacing={2} p={1} justifyContent="center">
+        {!loading && mostrarEmpleados.length > 0 ? (
+          mostrarEmpleados.map((empleado) => (
+            <Grid item xs={12} sm={2} md={4} key={empleado.documento}>
+              <Carta empleado={empleado} onDelete={eliminarEmpleado} />
+            </Grid>
+          ))
+        ) : (
+          <Typography>No se encontraron empleados.</Typography>
+        )}
 
         {loading && <Typography>Cargando empleados...</Typography>}
         {error && <Typography>Error: {error}</Typography>}
-        {!loading && empleadosFiltrados.length === 0 && (
-
-          <EmptyState title="¡Empieza creando un empleado!" subtitle="Aquí encontrarás todos los empleados una vez que los crees." actions={<Button
+        {!loading && empleados.length === 0 && !filtroDocumento && (
+          <Grid item xs={12}>
+            <EmptyState 
+              title="¡Empieza creando un empleado!" 
+              subtitle="Aquí encontrarás todos los empleados una vez que los crees." 
+              actions={
+                <Button
                   variant="outlined"
                   size="medium"
                   onClick={() => abrirFormularioNuevoEmpleado(true)}
                 >
                   + Agregar empleado
-                </Button>} containerHeight="74vh" />
-
+                </Button>
+              } 
+              containerHeight="74vh" 
+            />
+          </Grid>
         )}
-      </Box>
+      </Grid>
 
       {formulario && (
         <NuevoEmpleado
           open={formulario}
-          onClose={() => abrirFormularioNuevoEmpleado(false)}
+          onClose={agregarEmpleado}
           selectedValue=""
         />
       )}

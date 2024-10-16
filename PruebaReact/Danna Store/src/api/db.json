@@ -1,54 +1,81 @@
 {
   "empleados": [
     {
-      "cedula": "123456789",
-      "nombre": "Juan",
+      "documento": "123456789",
+      "nombres": "Juan",
       "apellidos": "Pérez García",
       "edad": 35,
       "genero": "Masculino",
       "estadoCivil": "Soltero",
       "tipoContrato": "Indefinido",
-      "salario": 3500
+      "salario": 3500,
+      "id": "36a2"
     },
     {
-      "cedula": "987654321",
-      "nombre": "María",
+      "documento": "987654321",
+      "nombres": "María",
       "apellidos": "Rodríguez López",
       "edad": 28,
       "genero": "Femenino",
       "estadoCivil": "Casada",
       "tipoContrato": "Temporal",
-      "salario": 2800
+      "salario": 2800,
+      "id": "047f"
     },
     {
-      "cedula": "123789456",
-      "nombre": "Carlos",
+      "documento": "123789456",
+      "nombres": "Carlos",
       "apellidos": "Fernández Torres",
       "edad": 40,
       "genero": "Masculino",
       "estadoCivil": "Divorciado",
       "tipoContrato": "Indefinido",
-      "salario": 4500
+      "salario": 4500,
+      "id": "bcce"
     },
     {
-      "cedula": "321654987",
-      "nombre": "Lucía",
+      "documento": "321654987",
+      "nombres": "Lucía",
       "apellidos": "Martínez Gómez",
       "edad": 32,
       "genero": "Femenino",
       "estadoCivil": "Soltera",
       "tipoContrato": "Temporal",
-      "salario": 3000
+      "salario": 3000,
+      "id": "c9ec"
     },
     {
-      "cedula": "654987321",
-      "nombre": "Javier",
+      "documento": "654987321",
+      "nombres": "Javier",
       "apellidos": "Gómez Ruiz",
       "edad": 45,
       "genero": "Masculino",
       "estadoCivil": "Viudo",
       "tipoContrato": "Indefinido",
-      "salario": 5000
+      "salario": 5000,
+      "id": "be28"
+    },
+    {
+      "id": "d40e",
+      "nombres": "milo",
+      "apellidos": "rojas",
+      "documento": "1243546576",
+      "edad": 23,
+      "salario": 1300000,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
+    },
+    {
+      "id": "ce16",
+      "nombres": "cristian",
+      "apellidos": "lozano",
+      "documento": "1234567898",
+      "edad": 19,
+      "salario": 1300000,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
     }
   ]
 }
