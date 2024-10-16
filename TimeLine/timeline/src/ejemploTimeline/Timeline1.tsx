@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { DrawerComponent, SincoTheme } from "@sinco/react";
+import { DrawerComponent } from "@sinco/react";
 import {
+  DateRange,
   Timeline,
   TimelineConnector,
   TimelineContent,
   TimelineDot,
   TimelineItem,
   TimelineOppositeContent,
+  timelineOppositeContentClasses,
   TimelineSeparator,
 } from "@mui/lab";
 import {
@@ -16,10 +18,19 @@ import {
   Box,
   Button,
   Chip,
+  FormControl,
   IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   Typography,
 } from "@mui/material";
-import { ExpandMore, History } from "@mui/icons-material";
+import { Event, ExpandMore, History, Search } from "@mui/icons-material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import dayjs, { Dayjs } from "dayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DateRangePicker } from "@mui/x-date-pickers-pro";
 
 export default function Timeline1() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -28,17 +39,84 @@ export default function Timeline1() {
     setDrawerOpen(open);
   };
 
+  const [value, setValue] = useState<DateRange<Dayjs>>([
+    dayjs("2022-04-17"),
+    dayjs("2022-04-21"),
+  ]);
+
   return (
     <div>
       <Button onClick={toggleDrawer(true)}>Open drawer</Button>
       <DrawerComponent
-        onClose={toggleDrawer(false)}
+        actions
+        onClose={() => toggleDrawer(false)}
         anchorActions="flex-end"
         title="Historial de cambios"
         open={isDrawerOpen}
         width="502px"
         children={
           <Box>
+            <Box pb="6px">
+              <Box display={"flex"} gap={1}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer
+                    components={["DateRangePicker", "DateRangePicker"]}
+                    sx={{
+                      overflow: "visible",
+                      paddingTop: 0,
+                      ".MuiMultiInputDateRangeField-separator": {
+                        display: "none",
+                      },
+                      ".MuiMultiInputDateRangeField-root>:not(style)~:not(style)":
+                        {
+                          marginLeft: 1,
+                        },
+                    }}
+                  >
+                    <DemoItem component="DateRangePicker">
+                      <DateRangePicker
+                        value={value}
+                        onChange={(newValue) => setValue(newValue)}
+                        slotProps={{
+                          textField: (params) => ({
+                            size: "small",
+                            label:
+                              params.position === "start"
+                                ? "Fecha de inicio"
+                                : "Fecha de fin",
+                            fullWidth: true,
+                            InputProps: {
+                              endAdornment: (
+                                <Event
+                                  color="action"
+                                  fontSize="small"
+                                  sx={{
+                                    padding: "8px 0px 8px 12px !importand",
+                                  }}
+                                />
+                              ),
+                            },
+                          }),
+                        }}
+                      />
+                    </DemoItem>
+                  </DemoContainer>
+                </LocalizationProvider>
+                <FormControl size="small" variant="outlined" fullWidth>
+                  <InputLabel id="select-label">Todos</InputLabel>
+                  <Select
+                    labelId="Buscar usuario"
+                    id="select-demo"
+                    label="Buscar usuario"
+                    IconComponent={Search}
+                  >
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </Box>
             <Accordion>
               <AccordionSummary
                 sx={{ backgroundColor: "grey.100" }}
@@ -49,7 +127,7 @@ export default function Timeline1() {
                 <Typography
                   variant="subtitle2"
                   color="texy.primary"
-                  sx={{ paddingRight: 2 }}
+                  sx={{ pr: 2 }}
                 >
                   Año 2023
                 </Typography>
@@ -62,43 +140,48 @@ export default function Timeline1() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ backgroundColor: "grey.100" }}>
-                <Timeline sx={{ padding: 0 }}>
-                  <TimelineItem sx={{ display: "flex", gap: 1.5 }}>
-                    <TimelineOppositeContent
-                      sx={{ textAlign: "left", flex: 0, padding: "8px 0px" }}
-                    >
+                <Timeline
+                  sx={{
+                    padding: 0,
+                    [`& .${timelineOppositeContentClasses.root}`]: {
+                      flex: 0.2,
+                    },
+                  }}
+                >
+                  <TimelineItem sx={{ gap: 1 }}>
+                    <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         12/08/2024
                       </Typography>
                     </TimelineOppositeContent>
-                    <TimelineSeparator
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
+                    <TimelineSeparator>
                       <TimelineDot color="info" />
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent sx={{ flex: 2, padding: "8px 0px" }}>
+                    <TimelineContent sx={{ padding: "8px 0px" }}>
                       <Box display={"flex"} justifyContent={"space-between"}>
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
                           label="Eliminado"
-                          style={{
-                            backgroundColor: SincoTheme.palette.error[100],
-                          }}
+                          color="error"
                           size="small"
                           variant="filled"
                         />
                       </Box>
-                      <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
-  <Typography variant="body2" color="text.primary">
-    NM - Nombre tipo de documento 24
-  </Typography>
-  <IconButton color="default" size="small">
-    <History />
-  </IconButton>
-</Box>
+                      <Box
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                      >
+                        <Typography variant="body2" color="text.primary">
+                          NM - Nombre tipo de documento 24
+                        </Typography>
+                        <IconButton color="default" size="small">
+                          <History />
+                        </IconButton>
+                      </Box>
                       <Box>
                         <Typography variant="body2" color="text.primary">
                           Usuario cliente 2
@@ -107,42 +190,40 @@ export default function Timeline1() {
                     </TimelineContent>
                   </TimelineItem>
 
-                  <TimelineItem sx={{ display: "flex", gap: 1.5 }}>
-                    <TimelineOppositeContent
-                      sx={{ textAlign: "left", flex: 0, padding: "8px 0px" }}
-                    >
+                  <TimelineItem sx={{ gap: 1 }}>
+                    <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         12/08/2024
                       </Typography>
                     </TimelineOppositeContent>
-                    <TimelineSeparator
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
+                    <TimelineSeparator>
                       <TimelineDot />
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent sx={{ flex: 2, padding: "8px 0px" }}>
+                    <TimelineContent sx={{ padding: "8px 0px" }}>
                       <Box display={"flex"} justifyContent={"space-between"}>
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
                           label="Editado"
-                          style={{
-                            backgroundColor: SincoTheme.palette.warning[100],
-                          }}
+                          color="warning"
                           size="small"
                           variant="filled"
                         />
                       </Box>
-                      <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
-  <Typography variant="body2" color="text.primary">
-    NM - Nombre tipo de documento 24
-  </Typography>
-  <IconButton color="default" size="small">
-    <History />
-  </IconButton>
-</Box>
+                      <Box
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                      >
+                        <Typography variant="body2" color="text.primary">
+                          NM - Nombre tipo de documento 24
+                        </Typography>
+                        <IconButton color="default" size="small">
+                          <History />
+                        </IconButton>
+                      </Box>
                       <Box>
                         <Typography variant="body2" color="text.primary">
                           Usuario cliente 2
@@ -151,42 +232,40 @@ export default function Timeline1() {
                     </TimelineContent>
                   </TimelineItem>
 
-                  <TimelineItem sx={{ display: "flex", gap: 1.5 }}>
-                    <TimelineOppositeContent
-                      sx={{ textAlign: "left", flex: 0, padding: "8px 0px" }}
-                    >
+                  <TimelineItem sx={{ gap: 1 }}>
+                    <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         12/08/2024
                       </Typography>
                     </TimelineOppositeContent>
-                    <TimelineSeparator
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
+                    <TimelineSeparator>
                       <TimelineDot />
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent sx={{ flex: 2, padding: "8px 0px" }}>
+                    <TimelineContent sx={{ padding: "8px 0px" }}>
                       <Box display={"flex"} justifyContent={"space-between"}>
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
                           label="Creado"
-                          style={{
-                            backgroundColor: SincoTheme.palette.info[100],
-                          }}
+                          color="info"
                           size="small"
                           variant="filled"
                         />
                       </Box>
-                      <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
-  <Typography variant="body2" color="text.primary">
-    NM - Nombre tipo de documento 24
-  </Typography>
-  <IconButton color="default" size="small">
-    <History />
-  </IconButton>
-</Box>
+                      <Box
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                      >
+                        <Typography variant="body2" color="text.primary">
+                          NM - Nombre tipo de documento 24
+                        </Typography>
+                        <IconButton color="default" size="small">
+                          <History />
+                        </IconButton>
+                      </Box>
                       <Box>
                         <Typography variant="body2" color="text.primary">
                           Usuario cliente 2
@@ -195,42 +274,40 @@ export default function Timeline1() {
                     </TimelineContent>
                   </TimelineItem>
 
-                  <TimelineItem sx={{ display: "flex", gap: 1.5 }}>
-                    <TimelineOppositeContent
-                      sx={{ textAlign: "left", flex: 0, padding: "8px 0px" }}
-                    >
+                  <TimelineItem sx={{ gap: 1 }}>
+                    <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         12/08/2024
                       </Typography>
                     </TimelineOppositeContent>
-                    <TimelineSeparator
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
+                    <TimelineSeparator>
                       <TimelineDot />
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent sx={{ flex: 2, padding: "8px 0px" }}>
+                    <TimelineContent sx={{ padding: "8px 0px" }}>
                       <Box display={"flex"} justifyContent={"space-between"}>
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
                           label="Asignado"
-                          style={{
-                            backgroundColor: SincoTheme.palette.secondary[50],
-                          }}
+                          color="secondary"
                           size="small"
                           variant="filled"
                         />
                       </Box>
-                      <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
-  <Typography variant="body2" color="text.primary">
-    NM - Nombre tipo de documento 24
-  </Typography>
-  <IconButton color="default" size="small">
-    <History />
-  </IconButton>
-</Box>
+                      <Box
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                      >
+                        <Typography variant="body2" color="text.primary">
+                          NM - Nombre tipo de documento 24
+                        </Typography>
+                        <IconButton color="default" size="small">
+                          <History />
+                        </IconButton>
+                      </Box>
                       <Box>
                         <Typography variant="body2" color="text.primary">
                           Usuario cliente 2
@@ -265,43 +342,45 @@ export default function Timeline1() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ backgroundColor: "grey.100" }}>
-                <Timeline sx={{ padding: 0 }}>
-                  <TimelineItem sx={{ display: "flex", gap: 1.5 }}>
-                    <TimelineOppositeContent
-                      sx={{ textAlign: "left", flex: 0, padding: "8px 0px" }}
-                    >
+                <Timeline>
+                  <TimelineItem>
+                    <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         12/08/2024
                       </Typography>
                     </TimelineOppositeContent>
-                    <TimelineSeparator
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
+                    <TimelineSeparator>
                       <TimelineDot color="info" />
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent sx={{ flex: 2, padding: "8px 0px" }}>
-                      <Box display={"flex"} justifyContent={"space-between"} gap={1}>
+                    <TimelineContent sx={{ padding: "8px 0px" }}>
+                      <Box
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                        gap={1}
+                      >
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
                           label="Editado"
-                          style={{
-                            backgroundColor: SincoTheme.palette.warning[100],
-                          }}
+                          color="warning"
                           size="small"
                           variant="filled"
                         />
                       </Box>
-                      <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
-  <Typography variant="body2" color="text.primary">
-    NM - Nombre tipo de documento 24
-  </Typography>
-  <IconButton color="default" size="small">
-    <History />
-  </IconButton>
-</Box>
+                      <Box
+                        display={"flex"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                      >
+                        <Typography variant="body2" color="text.primary">
+                          NM - Nombre tipo de documento 24
+                        </Typography>
+                        <IconButton color="default" size="small">
+                          <History />
+                        </IconButton>
+                      </Box>
                       <Box>
                         <Typography variant="body2" color="text.primary">
                           Usuario cliente 2

@@ -11,17 +11,19 @@ import {
   SelectChangeEvent,
   Divider,
   Stack,
+  
 } from "@mui/material";
-import { AddTask, ArrowForward, Loop } from "@mui/icons-material";
+import { AddTask, ArrowForward, Event, Loop, Search } from "@mui/icons-material";
 import {
   Timeline,
   TimelineConnector,
   TimelineContent,
   TimelineItem,
   TimelineOppositeContent,
+  timelineOppositeContentClasses,
   TimelineSeparator,
 } from "@mui/lab";
-import { DrawerComponent, SincoTheme } from "@sinco/react";
+import { DrawerComponent } from "@sinco/react";
 import { useState } from "react";
 
 export default function Timeline2() {
@@ -45,272 +47,271 @@ export default function Timeline2() {
         anchorActions="flex-start"
         onClose={() => false}
         title="1. Balcones del Norte - Etapa I"
-        children={
-          <Stack gap={1} sx={{ height: '100%', overflow: 'hidden' }}>
-            <Box display={"flex"} gap={1}>
-              <TextField
-                id="Rango de fecha"
-                label="Rango de fecha"
-                variant="outlined"
-                size="small"
-                fullWidth
-              />
+        children={<Stack gap={1} >
+          <Box display={"flex"} gap={1}>
+            <TextField
+              id="Rango de fecha"
+              label="Rango de fecha"
+              variant="outlined"
+              size="small"
+              fullWidth
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <Event color="action" fontSize="small" />
+                  ),
+                },
+              }}
+               />
 
-              <FormControl size="small" variant="outlined" fullWidth>
-                <InputLabel id="select-label">Buscar usuario</InputLabel>
-                <Select
-                  labelId="Buscar usuario"
-                  id="select-demo"
-                  value={age}
-                  label="Buscar usuario"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Divider/>
-            <Timeline sx={{ padding: 0 }}>
-              
-              <TimelineItem>
-                <TimelineOppositeContent sx={{ textAlign: "left", flex: 0 }}>
+            <FormControl size="small" variant="outlined" fullWidth>
+              <InputLabel id="select-label">Buscar usuario</InputLabel>
+              <Select
+                labelId="Buscar usuario"
+                id="select-demo"
+                value={age}
+                label="Buscar usuario"
+                onChange={handleChange}
+                IconComponent={Search}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Divider />
+          <Timeline sx={{
+            padding: 0, [`& .${timelineOppositeContentClasses.root}`]: {
+              flex: 0.2,
+              display:'flex',
+              gap:1
+            },
+            display:"flex",gap:1
+          }}>
+
+            <TimelineItem >
+              <TimelineOppositeContent sx={{ padding: '8px 0px'}}>
+                <Typography variant="body2" color="text.secondary">
+                  10/04/2024
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator sx={{display:"flex",gap:0.4}}>
+                <Loop color="secondary" />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Box display={"flex"} justifyContent={"space-between"}>
                   <Typography variant="body2" color="text.secondary">
-                    10/04/2024
+                    11:30:41 a.m.
                   </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <Loop color="secondary" />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent sx={{ flex: 1 }}>
-                  <Box display={"flex"} justifyContent={"space-between"}>
-                    <Typography variant="body2" color="text.secondary">
-                      11:30:41 a.m.
-                    </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="caption">Cambió de etapa</Typography>
+                  <Box display={"flex"} gap={0.5}>
+                    <Chip
+                      label="Aplazado"
+                      color="default"
+                      size="medium"
+                      variant="outlined" />
+                    <ArrowForward />
+                    <Chip
+                      label="Ejecución"
+                      color="success"
+                      size="medium"
+                      variant="filled" />
                   </Box>
-                  <Box>
-                    <Typography variant="caption">Cambió de etapa</Typography>
-                    <Box display={"flex"} gap={0.5}>
-                      <Chip
-                        label="Aplazado"
-                        color="default"
-                        size="medium"
-                        variant="outlined"
-                      />
-                      <ArrowForward />
-                      <Chip
-                        label="Ejecución"
-                         style={{backgroundColor:SincoTheme.palette.success[100]}}
-                        size="medium"
-                        variant="filled"
-                      />
-                    </Box>
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="text.primary">
-                      Nombre del usuario
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
-                      Ver comentario
-                    </Typography>
-                  </Box>
-                </TimelineContent>
-              </TimelineItem>
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.primary">
+                    Nombre del usuario
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
+                    Ver comentario
+                  </Typography>
+                </Box>
+              </TimelineContent>
+            </TimelineItem>
 
-              <TimelineItem>
-                <TimelineOppositeContent sx={{ textAlign: "left", flex: 0 }}>
+            <TimelineItem >
+              <TimelineOppositeContent sx={{ padding: '8px 0px' }} display={"flex"} gap={1} >
+                <Typography variant="body2" color="text.secondary">
+                  10/04/2024
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator sx={{display:"flex",gap:0.4}}
+              >
+                <Loop color="disabled" />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent sx={{ flex: 1 }}>
+                <Box display={"flex"} justifyContent={"space-between"}>
                   <Typography variant="body2" color="text.secondary">
-                    10/04/2024
+                    11:30:41 a.m.
                   </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <Loop color="disabled" />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent sx={{ flex: 1 }}>
-                  <Box display={"flex"} justifyContent={"space-between"}>
-                    <Typography variant="body2" color="text.secondary">
-                      11:30:41 a.m.
-                    </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="caption">Cambió de etapa</Typography>
+                  <Box display={"flex"} gap={0.5}>
+                    <Chip
+                      label="Aplazado"
+                      color="default"
+                      size="medium"
+                      variant="outlined" />
+                    <ArrowForward />
+                    <Chip
+                      label="Ejecución"
+                      color="success"
+                      size="medium"
+                      variant="filled" />
                   </Box>
-                  <Box>
-                    <Typography variant="caption">Cambió de etapa</Typography>
-                    <Box display={"flex"} gap={0.5}>
-                      <Chip
-                        label="Aplazado"
-                        color="default"
-                        size="medium"
-                        variant="outlined"
-                      />
-                      <ArrowForward />
-                      <Chip
-                        label="Ejecución"
-                        style={{backgroundColor:SincoTheme.palette.success[100]}}
-                        size="medium"
-                        variant="filled"
-                      />
-                    </Box>
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="text.primary">
-                      Nombre del usuario
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
-                      Ver comentario
-                    </Typography>
-                  </Box>
-                </TimelineContent>
-              </TimelineItem>
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.primary">
+                    Nombre del usuario
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
+                    Ver comentario
+                  </Typography>
+                </Box>
+              </TimelineContent>
+            </TimelineItem>
 
-              {/* numero 3 */}
+            <TimelineItem>
+              <TimelineOppositeContent sx={{ padding: '8px 0px' }}>
+                <Typography variant="body2" color="text.secondary">
+                  10/04/2024
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator sx={{display:"flex",gap:0.4}}
+              >
+                <Loop color="disabled" />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent sx={{ flex: 1 }}>
+                <Box display={"flex"} justifyContent={"space-between"} gap={1}>
+                  <Typography variant="body2" color="text.secondary" >
+                    11:30:41 a.m.
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body2">Se agregaron 12 usuarios</Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.primary">
+                    Nombre del usuario
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
+                    Ver comentario
+                  </Typography>
+                </Box>
+              </TimelineContent>
+            </TimelineItem>
 
-              <TimelineItem>
-                <TimelineOppositeContent sx={{ textAlign: "left", flex: 0 }}>
+            {/* numero 3 */}
+
+            <TimelineItem>
+              <TimelineOppositeContent sx={{ padding: '8px 0px' }}>
+                <Typography variant="body2" color="text.secondary">
+                  10/04/2024
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator sx={{display:"flex",gap:0.4}}
+              >
+                <Loop color="disabled" />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent sx={{ flex: 1 }}>
+                <Box display={"flex"} justifyContent={"space-between"}>
                   <Typography variant="body2" color="text.secondary">
-                    10/04/2024
+                    11:30:41 a.m.
                   </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator
-                  sx={{ display: "flex", alignItems: "center", flex: 0  }}
-                >
-                  <Loop color="disabled" />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent sx={{ flex: 1 }}>
-                  <Box display={"flex"} justifyContent={"space-between"}>
-                    <Typography variant="body2" color="text.secondary">
-                      11:30:41 a.m.
-                    </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="caption">Cambió de etapa</Typography>
+                  <Box display={"flex"} gap={0.5}>
+                    <Chip
+                      label="Aplazado"
+                      color="default"
+                      size="medium"
+                      variant="outlined" />
+                    <ArrowForward />
+                    <Chip
+                      label="Ejecución"
+                      color="success"
+                      size="medium"
+                      variant="filled" />
                   </Box>
-                  <Box>
-                    <Typography variant="body2" color="text.primary">Se agregaron 12 usuarios</Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="text.primary">
-                      Nombre del usuario
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
-                      Ver comentario
-                    </Typography>
-                  </Box>
-                </TimelineContent>
-              </TimelineItem>
-              <TimelineItem>
-                <TimelineOppositeContent sx={{ textAlign: "left", flex: 0 }}>
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.primary">
+                    Nombre del usuario
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
+                    Ver comentario
+                  </Typography>
+                </Box>
+              </TimelineContent>
+            </TimelineItem>
+
+            <TimelineItem>
+              <TimelineOppositeContent sx={{ padding: '8px 0px' }}>
+                <Typography variant="body2" color="text.secondary">
+                  10/04/2024
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator sx={{display:"flex",gap:0.4}}
+              >
+                <AddTask color="success"/>
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent sx={{ flex: 1 }}>
+                <Box display={"flex"} justifyContent={"space-between"}>
                   <Typography variant="body2" color="text.secondary">
-                    10/04/2024
+                    11:30:41 a.m.
                   </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <Loop color="disabled"  />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent sx={{ flex: 1 }}>
-                  <Box display={"flex"} justifyContent={"space-between"}>
-                    <Typography variant="body2" color="text.secondary">
-                      11:30:41 a.m.
-                    </Typography>
+                </Box>
+                <Box>
+                  <Typography variant="caption">Cambió de etapa</Typography>
+                  <Box display={"flex"} gap={0.5}>
+                    <Chip
+                      label="Aplazado"
+                      color="default"
+                      size="medium"
+                      variant="outlined" />
+                    <ArrowForward />
+                    <Chip
+                      label="Ejecución"
+                      color="success"
+                      size="medium"
+                      variant="filled" />
                   </Box>
-                  <Box>
-                    <Typography variant="caption">Cambió de etapa</Typography>
-                    <Box display={"flex"} gap={0.5}>
-                      <Chip
-                        label="Aplazado"
-                        color="default"
-                        size="medium"
-                        variant="outlined"
-                      />
-                      <ArrowForward />
-                      <Chip
-                        label="Ejecución"
-                         style={{backgroundColor:SincoTheme.palette.success[100]}}
-                        size="medium"
-                        variant="filled"
-                      />
-                    </Box>
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="text.primary">
-                      Nombre del usuario
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
-                      Ver comentario
-                    </Typography>
-                  </Box>
-                </TimelineContent>
-              </TimelineItem>
-
-              <TimelineItem>
-                <TimelineOppositeContent sx={{ textAlign: "left", flex: 0 }}>
-                  <Typography variant="body2" color="text.secondary">
-                    10/04/2024
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="text.primary">
+                    Nombre del usuario
                   </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <AddTask color="success" />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent sx={{ flex: 1 }}>
-                  <Box display={"flex"} justifyContent={"space-between"}>
-                    <Typography variant="body2" color="text.secondary">
-                      11:30:41 a.m.
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="caption">Cambió de etapa</Typography>
-                    <Box display={"flex"} gap={0.5}>
-                      <Chip
-                        label="Aplazado"
-                        color="default"
-                        size="medium"
-                        variant="outlined"
-                      />
-                      <ArrowForward />
-                      <Chip
-                        label="Ejecución"
-                         style={{backgroundColor:SincoTheme.palette.success[100]}}
-                        size="medium"
-                        variant="filled"
-                      />
-                    </Box>
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="text.primary">
-                      Nombre del usuario
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
-                      Ver comentario
-                    </Typography>
-                  </Box>
-                </TimelineContent>
-              </TimelineItem>
+                </Box>
+                <Box>
+                  <Typography variant="body3" color="primary" sx={{ textDecoration: 'underline' }}>
+                    Ver comentario
+                  </Typography>
+                </Box>
+              </TimelineContent>
+            </TimelineItem>
 
 
 
-            </Timeline>
-          </Stack>
-        }
-      />
+          </Timeline>
+        </Stack>} actions={undefined}      />
     </div>
   );
 }

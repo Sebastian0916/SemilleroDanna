@@ -16,7 +16,7 @@ import {
   Autocomplete,
   Badge,
 } from "@mui/material";
-import { ArrowForward, ExpandMore } from "@mui/icons-material";
+import { ArrowForward, ExpandMore, Search } from "@mui/icons-material";
 import {
   Timeline,
   TimelineConnector,
@@ -24,9 +24,10 @@ import {
   TimelineDot,
   TimelineItem,
   TimelineOppositeContent,
+  timelineOppositeContentClasses,
   TimelineSeparator,
 } from "@mui/lab";
-import { DrawerComponent, SincoTheme } from "@sinco/react";
+import { DrawerComponent } from "@sinco/react";
 import { useState } from "react";
 
 export default function Timeline3() {
@@ -47,17 +48,18 @@ export default function Timeline3() {
         onClose={() => false}
         title="Historial de cambios"
         children={
-          <Stack >
-            <Box pb='12px'>
+          <Stack>
+            <Box pb="6px">
               <Box display={"flex"} gap={2}>
                 <Autocomplete
                   disablePortal
+                  
                   id="combo-box-demo"
                   options={options}
                   size="small"
                   sx={{ width: 220 }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Option" />
+                    <TextField {...params} label="Tipo de cambio" />
                   )}
                 />
 
@@ -68,6 +70,7 @@ export default function Timeline3() {
                     id="select-demo"
                     size="small"
                     label="Label"
+                    IconComponent={Search}
                   >
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
@@ -100,31 +103,32 @@ export default function Timeline3() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ backgroundColor: "grey.100" }}>
-                <Timeline sx={{ padding: 0 }}>
-                  <TimelineItem sx={{display:'flex', gap:1.5 }}>
-                    <TimelineOppositeContent
-                      sx={{ textAlign: "left", flex: 0 ,padding:'8px 0px'}}
-                    >
+                <Timeline
+                  sx={{
+                    padding: 0,
+                    [`& .${timelineOppositeContentClasses.root}`]: {
+                      flex: 0.2,
+                    },
+                  }}
+                >
+                  <TimelineItem sx={{gap:1}}>
+                    <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         08/08/2024
                       </Typography>
                     </TimelineOppositeContent>
-                    <TimelineSeparator
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
+                    <TimelineSeparator>
                       <TimelineDot color="secondary" variant="outlined" />
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent sx={{ flex: 2 ,padding:'8px 0px' }}>
+                    <TimelineContent sx={{ flex: 2, padding: "8px 0px" }}>
                       <Box display={"flex"} justifyContent={"space-between"}>
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
                           label="Modificación"
-                          style={{
-                            backgroundColor: SincoTheme.palette.warning[100],
-                          }}
+                          color="warning"
                           size="small"
                           variant="filled"
                         />
@@ -217,30 +221,24 @@ export default function Timeline3() {
                     </TimelineContent>
                   </TimelineItem>
 
-                  <TimelineItem sx={{display:'flex', gap:1.5 }}>
-                    <TimelineOppositeContent
-                      sx={{ textAlign: "left", flex: 0 ,padding:'8px 0px'  }}
-                    >
+                  <TimelineItem sx={{gap:1}}>
+                    <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         08/08/2024
                       </Typography>
                     </TimelineOppositeContent>
-                    <TimelineSeparator
-                      sx={{ display: "flex", alignItems: "center"}}
-                    >
+                    <TimelineSeparator>
                       <TimelineDot color="grey" variant="outlined" />
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent sx={{ flex: 2 ,padding:'8px 0px'}}>
+                    <TimelineContent sx={{ padding: "8px 0px" }}>
                       <Box display={"flex"} justifyContent={"space-between"}>
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
                           label="Modificación"
-                          style={{
-                            backgroundColor: SincoTheme.palette.warning[100],
-                          }}
+                          color="warning"
                           size="small"
                           variant="filled"
                         />
@@ -342,30 +340,24 @@ export default function Timeline3() {
                     </TimelineContent>
                   </TimelineItem>
 
-                  <TimelineItem sx={{display:'flex', gap:1.5}}>
-                    <TimelineOppositeContent
-                      sx={{ textAlign: "left", flex: 0 ,padding:'8px 0px ' }}
-                    >
+                  <TimelineItem sx={{gap:1}}>
+                    <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         08/08/2024
                       </Typography>
                     </TimelineOppositeContent>
-                    <TimelineSeparator
-                      sx={{ display: "flex", alignItems: "center" }}
-                    >
+                    <TimelineSeparator>
                       <TimelineDot color="grey" variant="outlined" />
                       <TimelineConnector />
                     </TimelineSeparator>
-                    <TimelineContent sx={{ flex: 2,padding:'8px 0px'}}>
+                    <TimelineContent sx={{ padding: "8px 0px" }}>
                       <Box display={"flex"} justifyContent={"space-between"}>
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
                           label="Creación"
-                          style={{
-                            backgroundColor: SincoTheme.palette.info[100],
-                          }}
+                          color="info"
                           size="small"
                           variant="filled"
                         />
@@ -506,8 +498,8 @@ export default function Timeline3() {
               ></AccordionDetails>
             </Accordion>
           </Stack>
-          
         }
+        actions={undefined}
       />
     </div>
   );
