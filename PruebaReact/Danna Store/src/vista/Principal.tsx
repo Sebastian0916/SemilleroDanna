@@ -1,11 +1,10 @@
-import { 
+import {  
   Box,
   Button,
   Stack,
   TextField,
   Typography,
   Autocomplete,
-  Grid,
 } from "@mui/material";
 import { Carta } from "../components/Carta";
 import { useEffect, useState } from "react";
@@ -39,51 +38,60 @@ export default function Principal() {
 
   const agregarEmpleado = async (nuevoEmpleado: Empleado | null) => {
     if (nuevoEmpleado) {
-      try {
-        const response = await fetch("http://localhost:3004/empleados", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(nuevoEmpleado),
-        });
+      const response = await fetch("http://localhost:3004/empleados", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nuevoEmpleado),
+      });
 
-        if (response.ok) {
-          const empleadoGuardado = await response.json();
-          setEmpleados((prevEmpleados) => [...prevEmpleados, empleadoGuardado]);
-        } else {
-          throw new Error("No se pudo agregar el empleado.");
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          console.error(error.message);
-        } else {
-          console.error("Se produjo un error inesperado.");
-        }
+      if (response.ok) {
+        const empleadoGuardado = await response.json();
+        setEmpleados((prevEmpleados) => [...prevEmpleados, empleadoGuardado]);
+      } else {
+        console.error("No se pudo agregar el empleado.");
       }
     }
     setFormulario(false);
   };
 
   const eliminarEmpleado = async (empleadoDocumento: string) => {
-    try {
-      const response = await fetch(`http://localhost:3004/empleados/${empleadoDocumento}`, {
-        method: "DELETE",
-      });
+    console.log(`Eliminando empleado con documento: ${empleadoDocumento}`);
+    const response = await fetch(`http://localhost:3004/empleados/${empleadoDocumento}`, {
+      method: "DELETE",
+    });
 
-      if (response.ok) {
-        setEmpleados((prevEmpleados) =>
-          prevEmpleados.filter((empleado) => empleado.documento !== empleadoDocumento)
-        );
-      } else {
-        throw new Error("No se pudo eliminar el empleado.");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      } else {
-        console.error("Se produjo un error inesperado.");
-      }
+    if (response.ok) {
+      console.log("Empleado eliminado con éxito.");
+      setEmpleados((prevEmpleados) =>
+        prevEmpleados.filter((empleado) => empleado.documento !== empleadoDocumento)
+      );
+    } else {
+      console.error("No se pudo eliminar el empleado.");
+      console.log(response)
+    }
+  };
+
+  const editarEmpleado = async (documento: string, datosActualizados: Partial<Empleado>) => {
+    const response = await fetch(`http://localhost:3004/empleados/${documento}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datosActualizados),
+    });
+
+    if (response.ok) {
+      const empleadoActualizado = await response.json();
+      setEmpleados((prevEmpleados) =>
+        prevEmpleados.map((empleado) =>
+          empleado.documento === documento ? empleadoActualizado : empleado
+        )
+      );
+      console.log("Empleado editado con éxito.");
+    } else {
+      console.error("No se pudo editar el empleado.");
     }
   };
 
@@ -156,21 +164,31 @@ export default function Principal() {
         </Box>
       </Stack>
 
-      <Grid container spacing={2} p={1} justifyContent="center">
+      <Box
+        display="grid"
+        gridTemplateColumns="repeat(3, 1fr)"
+        gap={2}
+        p={1}
+        justifyContent="center"
+      >
         {!loading && mostrarEmpleados.length > 0 ? (
           mostrarEmpleados.map((empleado) => (
-            <Grid item xs={12} sm={2} md={4} key={empleado.documento}>
-              <Carta empleado={empleado} onDelete={eliminarEmpleado} />
-            </Grid>
+            <Box key={empleado.documento}>
+              <Carta 
+                empleado={empleado} 
+                onDelete={eliminarEmpleado} 
+                onEdit={editarEmpleado} 
+              />
+            </Box>
           ))
         ) : (
-          <Typography>No se encontraron empleados.</Typography>
+          <Typography></Typography>
         )}
 
         {loading && <Typography>Cargando empleados...</Typography>}
         {error && <Typography>Error: {error}</Typography>}
         {!loading && empleados.length === 0 && !filtroDocumento && (
-          <Grid item xs={12}>
+          <Box>
             <EmptyState 
               title="¡Empieza creando un empleado!" 
               subtitle="Aquí encontrarás todos los empleados una vez que los crees." 
@@ -185,9 +203,9 @@ export default function Principal() {
               } 
               containerHeight="74vh" 
             />
-          </Grid>
+          </Box>
         )}
-      </Grid>
+      </Box>
 
       {formulario && (
         <NuevoEmpleado

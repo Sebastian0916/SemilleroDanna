@@ -22,13 +22,13 @@ const style = {
 export interface MensajeErrorProps {
   open: boolean;
   selectedValue: Empleado; 
-  onClose: () => void; // Cambiado para no recibir el parámetro
-  funcionAceptar: () => void; // Esta línea se mantiene
+  onClose: () => void;
+  funcionAceptar: () => void;
 }
 
 export default function MensajeError({ onClose, open, funcionAceptar }: MensajeErrorProps) {
   const handleClose = () => {
-    onClose(); // Solo llama a onClose sin parámetros
+    onClose();
   };
 
   return (

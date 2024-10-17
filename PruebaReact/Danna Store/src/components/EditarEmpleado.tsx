@@ -73,16 +73,18 @@ export function EditarEmpleado({ open, onClose, selectedValue }: EditarEmpleadoP
               variant="outlined"
               size="small"
               fullWidth
+              disabled
               value={selectedValue.nombres}
-              InputProps={{ readOnly: true }}
+             
             />
             <TextField
               label="Apellidos"
               variant="outlined"
               size="small"
               fullWidth
+              disabled
               value={selectedValue.apellidos}
-              InputProps={{ readOnly: true }}
+              
             />
           </Box>
 
@@ -92,16 +94,18 @@ export function EditarEmpleado({ open, onClose, selectedValue }: EditarEmpleadoP
               variant="outlined"
               size="small"
               fullWidth
+              disabled
               value={selectedValue.documento}
-              InputProps={{ readOnly: true }}
+              
             />
             <TextField
               label="Edad"
               variant="outlined"
               size="small"
+              disabled
               fullWidth
               value={selectedValue.edad.toString()}
-              InputProps={{ readOnly: true }}
+             
             />
           </Box>
 
@@ -124,7 +128,7 @@ export function EditarEmpleado({ open, onClose, selectedValue }: EditarEmpleadoP
               <Select
                 labelId="estadoCivil-select-label"
                 value={selectedValue.estadoCivil}
-                readOnly
+        
                 size="small"
               >
                 <MenuItem value={1}>Soltero</MenuItem>
@@ -151,8 +155,8 @@ export function EditarEmpleado({ open, onClose, selectedValue }: EditarEmpleadoP
                 onChange={handleTipoContratoChange}
                 size="small"
               >
-                <MenuItem value={1}>Tiempo completo</MenuItem>
-                <MenuItem value={2}>Medio tiempo</MenuItem>
+                <MenuItem value={1}>Definido</MenuItem>
+                <MenuItem value={2}>Indefinido</MenuItem>
               </Select>
             </FormControl>
           </Box>

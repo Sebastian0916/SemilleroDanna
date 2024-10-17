@@ -10,7 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
-import { EditarEmpleado } from "./EditarEmpleado";
 import { useState } from "react";
 import { Empleado } from "../interface/empleado";
 
@@ -103,7 +102,7 @@ export function VerEmpleado({ onClose, selectedValue, open }: VerEmpleadoProps) 
           </Button>
         </Box>
       </DialogActions>
-      {edicionEmpleado && <EditarEmpleado open={edicionEmpleado} onClose={() => abrirFormularioEditarEmpleado(false)} selectedValue={selectedValue} />}
+      {edicionEmpleado && <VerEmpleado open={edicionEmpleado} onClose={() => abrirFormularioEditarEmpleado(false)} selectedValue={selectedValue} />}
     </Dialog>
   );
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { DeleteOutline, EditOutlined } from "@mui/icons-material";
 import {
   Avatar,
@@ -13,15 +12,16 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { EditarEmpleado } from "./EditarEmpleado";
 import { useState } from "react";
 import { VerEmpleado } from "./VerEmpleado";
 import MensajeError from "./MensajeError";
 import { Empleado } from "../interface/empleado";
+import { EditarEmpleado } from "./EditarEmpleado";
 
 interface CartaProps {
   empleado: Empleado;
-  onDelete: (empleadoDocumento: string) => void; // Agregar esta propiedad
+  onDelete: (empleadoDocumento: string) => void;
+  onEdit: (documento: string, datosActualizados: Partial<Empleado>) => void; // Añadir la propiedad onEdit
 }
 
 export const Carta = ({ empleado, onDelete }: CartaProps) => {
@@ -132,32 +132,32 @@ export const Carta = ({ empleado, onDelete }: CartaProps) => {
       </Card>
 
       {edicionEmpleado && (
-        <EditarEmpleado
-          open={edicionEmpleado}
-          onClose={() => abrirFormularioEditarEmpleado(false)}
-          selectedValue={empleado} // Cambiado para pasar el empleado
-        />
-      )}
+  <EditarEmpleado
+    open={edicionEmpleado}
+    onClose={() => abrirFormularioEditarEmpleado(false)}
+   selectedValue={empleado}
+  />
+)}
 
       {detalleEmpleado && (
         <VerEmpleado
           open={detalleEmpleado}
           onClose={() => abrirFormularioDetalleEmpleado(false)}
-          selectedValue={empleado} // Cambiado para pasar el empleado
+          selectedValue={empleado} 
         />
       )}
 
-{confirmacionEmpleado && (
-  <MensajeError
-    open={confirmacionEmpleado}
-    onClose={() => modalConfirmacion(false)} // Solo cerramos el modal
-    selectedValue={empleado}
-    funcionAceptar={() => {
-      onDelete(empleado.documento); // Aquí se llama a la función de eliminación
-      modalConfirmacion(false); // Cierra el modal después de aceptar
-    }}
-  />
-)}
+      {confirmacionEmpleado && (
+        <MensajeError
+          open={confirmacionEmpleado}
+          onClose={() => modalConfirmacion(false)}
+          selectedValue={empleado} 
+          funcionAceptar={() => {
+            onDelete(empleado.documento);
+            modalConfirmacion(false); 
+          }} 
+        />
+      )}
     </Stack>
   );
 };
