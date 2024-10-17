@@ -12,6 +12,7 @@ import {
 import { Close } from "@mui/icons-material";
 import { useState } from "react";
 import { Empleado } from "../interface/empleado";
+import { EditarEmpleado } from "./EditarEmpleado";
 
 export interface VerEmpleadoProps {
   open: boolean;
@@ -55,39 +56,39 @@ export function VerEmpleado({ onClose, selectedValue, open }: VerEmpleadoProps) 
         <Stack gap={1} padding={"12px 16px 8px 16px"}>
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="caption" color="text.secondary" sx={{ width: 320 }}>
-              Nombres: <Typography variant="body2">{selectedValue.nombres}</Typography>
+              Nombres: <Typography variant="body2" color="text.primary">{selectedValue.nombres}</Typography>
             </Typography>
 
             <Typography variant="caption" color="text.secondary" sx={{ width: 320 }}>
-              Apellidos: <Typography variant="body2">{selectedValue.apellidos}</Typography>
+              Apellidos: <Typography variant="body2" color="text.primary">{selectedValue.apellidos}</Typography>
             </Typography>
           </Box>
 
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="caption" color="text.secondary" sx={{ width: 320 }}>
-              Documento: <Typography variant="body2">{selectedValue.documento}</Typography>
+              Documento: <Typography variant="body2" color="text.primary">{selectedValue.documento}</Typography>
             </Typography>
 
             <Typography variant="caption" color="text.secondary" sx={{ width: 320 }}>
-              Edad: <Typography variant="body2">{selectedValue.edad}</Typography>
+              Edad: <Typography variant="body2" color="text.primary">{selectedValue.edad}</Typography>
             </Typography>
           </Box>
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="caption" color="text.secondary" sx={{ width: 320 }}>
-              Estado civil: <Typography variant="body2">{selectedValue.estadoCivil}</Typography>
+              Estado civil: <Typography variant="body2" color="text.primary">{selectedValue.estadoCivil ===1?"Soltero":selectedValue.estadoCivil === 2 ? "Casado":"Viudo"}</Typography>
             </Typography>
 
             <Typography variant="caption" color="text.secondary" sx={{ width: 320 }}>
-              Género: <Typography variant="body2">{selectedValue.genero}</Typography>
+              Género: <Typography variant="body2" color="text.primary">{selectedValue.genero === 1 ? "Masculino" :"Femenino"}</Typography>
             </Typography>
           </Box>
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="caption" color="text.secondary" sx={{ width: 320 }}>
-              Salario: <Typography variant="body2">{selectedValue.salario}</Typography>
+              Salario: <Typography variant="body2" color="text.primary">{selectedValue.salario}</Typography>
             </Typography>
 
             <Typography variant="caption" color="text.secondary" sx={{ width: 320 }}>
-              Tipo de contrato: <Typography variant="body2">{selectedValue.tipoContrato}</Typography>
+              Tipo de contrato: <Typography variant="body2" color="text.primary">{selectedValue.tipoContrato === 1 ? "Definido":"Indefinido "}</Typography>
             </Typography>
           </Box>
         </Stack>
@@ -102,7 +103,7 @@ export function VerEmpleado({ onClose, selectedValue, open }: VerEmpleadoProps) 
           </Button>
         </Box>
       </DialogActions>
-      {edicionEmpleado && <VerEmpleado open={edicionEmpleado} onClose={() => abrirFormularioEditarEmpleado(false)} selectedValue={selectedValue} />}
+      {edicionEmpleado && <EditarEmpleado open={edicionEmpleado} onClose={() => abrirFormularioEditarEmpleado(false)} selectedValue={selectedValue} />}
     </Dialog>
   );
 }

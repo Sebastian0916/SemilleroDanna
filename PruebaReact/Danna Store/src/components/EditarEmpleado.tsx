@@ -113,9 +113,10 @@ export function EditarEmpleado({ open, onClose, selectedValue }: EditarEmpleadoP
             <FormControl fullWidth>
               <InputLabel id="genero-select-label">Género</InputLabel>
               <Select
+              disabled
                 labelId="genero-select-label"
                 value={selectedValue.genero}
-                readOnly
+                label="Género"
                 size="small"
               >
                 <MenuItem value={1}>Masculino</MenuItem>
@@ -126,9 +127,10 @@ export function EditarEmpleado({ open, onClose, selectedValue }: EditarEmpleadoP
             <FormControl fullWidth>
               <InputLabel id="estadoCivil-select-label">Estado Civil</InputLabel>
               <Select
+              disabled
                 labelId="estadoCivil-select-label"
                 value={selectedValue.estadoCivil}
-        
+                label="Estado Civil"
                 size="small"
               >
                 <MenuItem value={1}>Soltero</MenuItem>
@@ -154,6 +156,7 @@ export function EditarEmpleado({ open, onClose, selectedValue }: EditarEmpleadoP
                 value={tipoContrato}
                 onChange={handleTipoContratoChange}
                 size="small"
+                label="Tipo de Contrato"
               >
                 <MenuItem value={1}>Definido</MenuItem>
                 <MenuItem value={2}>Indefinido</MenuItem>

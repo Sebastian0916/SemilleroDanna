@@ -1,4 +1,4 @@
-import {  
+import {
   Box,
   Button,
   Stack,
@@ -9,7 +9,7 @@ import {
 import { Carta } from "../components/Carta";
 import { useEffect, useState } from "react";
 import { NuevoEmpleado } from "../components/NuevoEmpleado";
-import { Empleado } from "../interface/empleado"; 
+import { Empleado } from "../interface/empleado";
 import { EmptyState, SincoTheme } from "@sinco/react";
 
 export default function Principal() {
@@ -54,44 +54,28 @@ export default function Principal() {
       }
     }
     setFormulario(false);
+    
   };
 
   const eliminarEmpleado = async (empleadoDocumento: string) => {
     console.log(`Eliminando empleado con documento: ${empleadoDocumento}`);
-    const response = await fetch(`http://localhost:3004/empleados/${empleadoDocumento}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `http://localhost:3004/empleados/${empleadoDocumento}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (response.ok) {
       console.log("Empleado eliminado con éxito.");
       setEmpleados((prevEmpleados) =>
-        prevEmpleados.filter((empleado) => empleado.documento !== empleadoDocumento)
+        prevEmpleados.filter(
+          (empleado) => empleado.documento !== empleadoDocumento
+        )
       );
     } else {
       console.error("No se pudo eliminar el empleado.");
-      console.log(response)
-    }
-  };
-
-  const editarEmpleado = async (documento: string, datosActualizados: Partial<Empleado>) => {
-    const response = await fetch(`http://localhost:3004/empleados/${documento}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(datosActualizados),
-    });
-
-    if (response.ok) {
-      const empleadoActualizado = await response.json();
-      setEmpleados((prevEmpleados) =>
-        prevEmpleados.map((empleado) =>
-          empleado.documento === documento ? empleadoActualizado : empleado
-        )
-      );
-      console.log("Empleado editado con éxito.");
-    } else {
-      console.error("No se pudo editar el empleado.");
+      console.log(response);
     }
   };
 
@@ -99,10 +83,11 @@ export default function Principal() {
     ? empleados.filter((empleado) => empleado.documento === filtroDocumento)
     : empleados;
 
-  const mostrarEmpleados = empleadosFiltrados.length > 0 ? empleadosFiltrados : empleados;
+  const mostrarEmpleados =
+    empleadosFiltrados.length > 0 ? empleadosFiltrados : empleados;
 
   return (
-    <Stack bgcolor="background.default" height="100vh">
+    <Stack bgcolor="background.default" height={"100vh"}>
       <Stack
         sx={{
           width: "100%",
@@ -153,7 +138,7 @@ export default function Principal() {
             value={filtroDocumento}
             size="small"
           />
-          
+
           <Button
             variant="contained"
             color="primary"
@@ -163,49 +148,52 @@ export default function Principal() {
           </Button>
         </Box>
       </Stack>
-
+      <Box></Box>
       <Box
-        display="grid"
-        gridTemplateColumns="repeat(3, 1fr)"
-        gap={2}
-        p={1}
-        justifyContent="center"
+        display="flex"
+        flexWrap="wrap"
+        height={700}
+        sx={{ gap: 2, overflowY: "auto" }}
+        padding={"20px 150px 140px 178px"}
       >
-        {!loading && mostrarEmpleados.length > 0 ? (
-          mostrarEmpleados.map((empleado) => (
-            <Box key={empleado.documento}>
-              <Carta 
-                empleado={empleado} 
-                onDelete={eliminarEmpleado} 
-                onEdit={editarEmpleado} 
-              />
-            </Box>
-          ))
-        ) : (
-          <Typography></Typography>
-        )}
-
-        {loading && <Typography>Cargando empleados...</Typography>}
-        {error && <Typography>Error: {error}</Typography>}
-        {!loading && empleados.length === 0 && !filtroDocumento && (
-          <Box>
-            <EmptyState 
-              title="¡Empieza creando un empleado!" 
-              subtitle="Aquí encontrarás todos los empleados una vez que los crees." 
-              actions={
-                <Button
-                  variant="outlined"
-                  size="medium"
-                  onClick={() => abrirFormularioNuevoEmpleado(true)}
-                >
-                  + Agregar empleado
-                </Button>
-              } 
-              containerHeight="74vh" 
-            />
-          </Box>
-        )}
+        {!loading && mostrarEmpleados.length > 0
+          ? mostrarEmpleados.map((empleado) => (
+              <Box key={empleado.documento} height={"auto"}>
+                <Carta
+                  empleado={empleado}
+                  onDelete={eliminarEmpleado}
+                 
+                />
+              </Box>
+            ))
+          : !loading &&
+            empleados.length === 0 &&
+            !filtroDocumento && (
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                width="100%"
+              >
+                <EmptyState
+                  title="¡Empieza creando un empleado!"
+                  subtitle="Aquí encontrarás todos los empleados una vez que los crees."
+                  actions={
+                    <Button
+                      variant="outlined"
+                      size="medium"
+                      onClick={() => abrirFormularioNuevoEmpleado(true)}
+                    >
+                      + Agregar empleado
+                    </Button>
+                  }
+                />
+              </Box>
+            )}
       </Box>
+
+      {loading && <Typography>Cargando empleados...</Typography>}
+      {error && <Typography>Error: {error}</Typography>}
 
       {formulario && (
         <NuevoEmpleado

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -16,9 +16,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Close } from "@mui/icons-material";
-import { Empleado } from '../interface/empleado';
-import { SelectChangeEvent } from '@mui/material/Select';
-import { ToastNotification } from '@sinco/react';
+import { Empleado } from "../interface/empleado";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { ToastNotification } from "@sinco/react";
 
 export interface NuevoEmpleadoProps {
   open: boolean;
@@ -28,9 +28,9 @@ export interface NuevoEmpleadoProps {
 
 export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
   const [empleados, setEmpleados] = useState({
-    nombres: '',
-    apellidos: '',
-    documento: '',
+    nombres: "",
+    apellidos: "",
+    documento: "",
     edad: 0,
     salario: 0,
     genero: 0,
@@ -49,7 +49,7 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
     tipoContrato: false,
   });
 
-  const [toastVisible, setToastVisible] = useState(false); 
+  const [toastVisible, setToastVisible] = useState(false);
 
   const handleClose = () => {
     onClose(null);
@@ -60,7 +60,7 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
       nombres: !empleados.nombres.trim(),
       apellidos: !empleados.apellidos.trim(),
       documento: !empleados.documento.trim() || !/^\d{10}$/.test(empleados.documento),
-      edad: empleados.edad < 18, 
+      edad: empleados.edad < 18,
       salario: empleados.salario < 900000,
       genero: empleados.genero <= 0,
       estadoCivil: empleados.estadoCivil <= 0,
@@ -69,35 +69,57 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
 
     setErrors(nuevosErrores);
 
-    const hayErrores = Object.values(nuevosErrores).some(error => error);
+    const hayErrores = Object.values(nuevosErrores).some((error) => error);
 
     if (!hayErrores) {
-      onClose({ ...empleados });
-      setToastVisible(true); 
+      onClose({ ...empleados, tipoContrato: empleados.tipoContrato });
+      setToastVisible(true);
     }
   };
 
-  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleChange =
+    (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
 
-    if (field === 'documento') {
-      if (!/^\d{0,10}$/.test(value)) {
+      if (field === "nombres" || field === "apellidos") {
+        const isValid = /^[A-Za-z\s]*$/.test(value) && value.length;
+
+        if (isValid || value === "") {
+          setEmpleados({ ...empleados, [field]: value });
+          setErrors((prev) => ({
+            ...prev,
+            [field]: !value.trim(),
+          }));
+        } else {
+          setErrors((prev) => ({
+            ...prev,
+            [field]: true,
+          }));
+        }
         return;
       }
-    }
 
-    setEmpleados({ ...empleados, [field]: value });
+ 
+      if (field === "documento") {
+        if (!/^\d{0,10}$/.test(value)) {
+          return;
+        }
+      }
 
-    setErrors((prev) => ({
-      ...prev,
-      [field]:
-        field === 'salario'
-          ? (parseFloat(value) < 900000)
-          : (field === 'edad'
-            ? (parseInt(value) < 18)  
-            : (!value.trim() && field !== 'documento' ? true : (field === 'documento' && !/^\d{10}$/.test(value)))),
-    }));
-  };
+      setEmpleados({ ...empleados, [field]: value });
+
+      setErrors((prev) => ({
+        ...prev,
+        [field]:
+          field === "salario"
+            ? parseFloat(value) < 900000
+            : field === "edad"
+            ? parseInt(value) < 18
+            : !value.trim() && field !== "documento"
+            ? true
+            : field === "documento" && !/^\d{10}$/.test(value),
+      }));
+    };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!/[0-9]/.test(e.key)) {
@@ -105,15 +127,15 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
     }
   };
 
-  const handleSelectChange = (field: string) => (e: SelectChangeEvent<number>) => {
-    setEmpleados({ ...empleados, [field]: Number(e.target.value) }); // Convertir a number
+  const handleSelectChange =
+    (field: string) => (e: SelectChangeEvent<number>) => {
+      setEmpleados({ ...empleados, [field]: Number(e.target.value) }); 
 
- 
-    setErrors((prev) => ({
-      ...prev,
-      [field]: !e.target.value,
-    }));
-  };
+      setErrors((prev) => ({
+        ...prev,
+        [field]: !e.target.value,
+      }));
+    };
 
   return (
     <>
@@ -151,9 +173,15 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
                 size="small"
                 fullWidth
                 value={empleados.nombres}
-                onChange={handleChange('nombres')}
+                onChange={handleChange("nombres")}
                 error={errors.nombres}
-                helperText={errors.nombres && !empleados.nombres.trim() ? "Este campo es requerido" : ""}
+                helperText={
+                  errors.nombres
+                    ? "Solo se permiten letras"
+                    : errors.nombres && !empleados.nombres.trim()
+                    ? "Este campo es requerido"
+                    : ""
+                }
               />
               <TextField
                 label="Apellidos"
@@ -161,9 +189,15 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
                 size="small"
                 fullWidth
                 value={empleados.apellidos}
-                onChange={handleChange('apellidos')}
+                onChange={handleChange("apellidos")}
                 error={errors.apellidos}
-                helperText={errors.apellidos && !empleados.apellidos.trim() ? "Este campo es requerido" : ""}
+                helperText={
+                  errors.apellidos
+                    ? "Solo se permiten letras"
+                    : errors.apellidos && !empleados.apellidos.trim()
+                    ? "Este campo es requerido"
+                    : ""
+                }
               />
             </Box>
 
@@ -174,10 +208,12 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
                 size="small"
                 fullWidth
                 value={empleados.documento}
-                onChange={handleChange('documento')}
+                onChange={handleChange("documento")}
                 onKeyPress={handleKeyPress}
                 error={errors.documento}
-                helperText={errors.documento ? "Debe contener exactamente 10 dígitos" : ""}
+                helperText={
+                  errors.documento ? "Debe contener exactamente 10 dígitos" : ""
+                }
               />
               <TextField
                 label="Edad"
@@ -196,17 +232,19 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
                   }
                 }}
                 error={errors.edad}
-                helperText={errors.edad ? "La edad debe ser mínima 18 años" : ""}
+                helperText={
+                  errors.edad ? "La edad debe ser mínima 18 años" : ""
+                }
               />
             </Box>
 
             <Box sx={{ display: "flex", gap: 1 }}>
               <FormControl fullWidth error={errors.genero}>
                 <InputLabel id="genero-select-label">Género</InputLabel>
-                <Select  
-                  labelId="genero-select-label"
+                <Select
+                  label="Género"
                   value={empleados.genero}
-                  onChange={handleSelectChange('genero')}
+                  onChange={handleSelectChange("genero")}
                   size="small"
                 >
                   <MenuItem value="">
@@ -215,16 +253,20 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
                   <MenuItem value={1}>Masculino</MenuItem>
                   <MenuItem value={2}>Femenino</MenuItem>
                 </Select>
-                {errors.genero && <Typography color="error">Este campo es requerido</Typography>}
+                {errors.genero && (
+                  <Typography color="error">Este campo es requerido</Typography>
+                )}
               </FormControl>
 
               <FormControl fullWidth error={errors.estadoCivil}>
-                <InputLabel id="estadoCivil-select-label">Estado Civil</InputLabel>
+                <InputLabel id="estadoCivil-select-label">
+                  Estado Civil
+                </InputLabel>
                 <Select
                   labelId="estadoCivil-select-label"
                   value={empleados.estadoCivil}
-                  onChange={handleSelectChange('estadoCivil')}
-                  
+                  onChange={handleSelectChange("estadoCivil")}
+                  label="Estado Civil"
                   size="small"
                 >
                   <MenuItem value="">
@@ -234,7 +276,9 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
                   <MenuItem value={2}>Casado</MenuItem>
                   <MenuItem value={3}>Viudo</MenuItem>
                 </Select>
-                {errors.estadoCivil && <Typography color="error">Este campo es requerido</Typography>}
+                {errors.estadoCivil && (
+                  <Typography color="error">Este campo es requerido</Typography>
+                )}
               </FormControl>
             </Box>
 
@@ -256,14 +300,17 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
                   }
                 }}
                 error={errors.salario}
-                helperText={errors.salario ? "El salario debe ser mínimo 900,000 pesos" : ""}
+                helperText={
+                  errors.salario ? "El salario debe ser mínimo 900,000" : ""
+                }
               />
               <FormControl fullWidth error={errors.tipoContrato}>
                 <InputLabel id="tipoContrato-select-label">Tipo de Contrato</InputLabel>
                 <Select
                   labelId="tipoContrato-select-label"
                   value={empleados.tipoContrato}
-                  onChange={handleSelectChange('tipoContrato')}
+                  onChange={handleSelectChange("tipoContrato")}
+                  label="Tipo de Contrato"
                   size="small"
                 >
                   <MenuItem value="">
@@ -272,28 +319,27 @@ export function NuevoEmpleado({ onClose, open }: NuevoEmpleadoProps) {
                   <MenuItem value={1}>Definido</MenuItem>
                   <MenuItem value={2}>Indefinido</MenuItem>
                 </Select>
-                {errors.tipoContrato && <Typography color="error">Este campo es requerido</Typography>}
+                {errors.tipoContrato && (
+                  <Typography color="error">Este campo es requerido</Typography>
+                )}
               </FormControl>
             </Box>
           </Stack>
         </DialogContent>
-
         <DialogActions>
-          <Button variant="text" size="small" onClick={handleClose}>
+          <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button variant="contained" color="primary" size="small" onClick={handleGuardar}>
+          <Button onClick={handleGuardar} color="primary">
             Guardar
           </Button>
         </DialogActions>
       </Dialog>
-
-      {toastVisible && ( 
+      {toastVisible && (
         <ToastNotification
-        type='success'
-          title='Empleado agregado con éxito'
-          time={12000000}
-          
+          type="success"
+          title="Empleado agregado con éxito"
+          time={900000}
         />
       )}
     </>

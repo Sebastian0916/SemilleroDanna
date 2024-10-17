@@ -21,7 +21,6 @@ import { EditarEmpleado } from "./EditarEmpleado";
 interface CartaProps {
   empleado: Empleado;
   onDelete: (empleadoDocumento: string) => void;
-  onEdit: (documento: string, datosActualizados: Partial<Empleado>) => void; // Añadir la propiedad onEdit
 }
 
 export const Carta = ({ empleado, onDelete }: CartaProps) => {
@@ -41,15 +40,6 @@ export const Carta = ({ empleado, onDelete }: CartaProps) => {
     setConfirmacionEmpleado(estaAbierto);
   };
 
-  const generarColorAleatorio = () => {
-    const letras = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      color += letras[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  };
-
   return (
     <Stack width={321}>
       <Card>
@@ -59,18 +49,27 @@ export const Carta = ({ empleado, onDelete }: CartaProps) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
           }}
           avatar={
-            <Avatar sx={{ width: 32, height: 32, alignSelf: "center", backgroundColor: generarColorAleatorio() }}>
-              <Typography variant="subtitle1">
-                {`${empleado.nombres.split(' ')[0][0]}${empleado.apellidos.split(' ')[0][0]}`.toUpperCase()}
-              </Typography>
-            </Avatar>
+            <Avatar
+              sx={{ width: 32, height: 32, alignSelf: "center" }}
+            ></Avatar>
           }
           title={
-            <Typography variant="subtitle2">
-              {empleado.nombres} {empleado.apellidos}
-            </Typography>
+            <Box width={"100px"}>
+              <Typography
+                variant="subtitle2"
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
+                overflow="hidden"
+              >
+                {empleado.nombres}
+                {empleado.apellidos}
+              </Typography>
+            </Box>
           }
           action={
             <Stack
@@ -132,18 +131,18 @@ export const Carta = ({ empleado, onDelete }: CartaProps) => {
       </Card>
 
       {edicionEmpleado && (
-  <EditarEmpleado
-    open={edicionEmpleado}
-    onClose={() => abrirFormularioEditarEmpleado(false)}
-   selectedValue={empleado}
-  />
-)}
+        <EditarEmpleado
+          open={edicionEmpleado}
+          onClose={() => abrirFormularioEditarEmpleado(false)}
+          selectedValue={empleado}
+        />
+      )}
 
       {detalleEmpleado && (
         <VerEmpleado
           open={detalleEmpleado}
           onClose={() => abrirFormularioDetalleEmpleado(false)}
-          selectedValue={empleado} 
+          selectedValue={empleado}
         />
       )}
 
@@ -151,11 +150,11 @@ export const Carta = ({ empleado, onDelete }: CartaProps) => {
         <MensajeError
           open={confirmacionEmpleado}
           onClose={() => modalConfirmacion(false)}
-          selectedValue={empleado} 
+          selectedValue={empleado}
           funcionAceptar={() => {
             onDelete(empleado.documento);
-            modalConfirmacion(false); 
-          }} 
+            modalConfirmacion(false);
+          }}
         />
       )}
     </Stack>

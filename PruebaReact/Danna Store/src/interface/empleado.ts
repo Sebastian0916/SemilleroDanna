@@ -4,7 +4,7 @@ export interface Empleado {
   apellidos: string;
   edad: number;
   salario: number;
-  tipoContrato: number;
+  tipoContrato:number;
   genero: number;
   estadoCivil: number; 
 }
