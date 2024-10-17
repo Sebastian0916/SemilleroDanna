@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DrawerComponent } from "@sinco/react";
+import { Drawer } from "@sinco/react";
 import {
   DateRange,
   Timeline,
@@ -35,8 +35,8 @@ import { DateRangePicker } from "@mui/x-date-pickers-pro";
 export default function Timeline1() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-  const toggleDrawer = (open: boolean) => () => {
-    setDrawerOpen(open);
+  const toggleDrawer = () => () => {
+    setDrawerOpen(prev => !prev);
   };
 
   const [value, setValue] = useState<DateRange<Dayjs>>([
@@ -46,14 +46,14 @@ export default function Timeline1() {
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}>Open drawer</Button>
-      <DrawerComponent
-        actions
-        onClose={() => toggleDrawer(false)}
+      <Button onClick={toggleDrawer()}>Open drawer</Button>
+      <Drawer
+        open={isDrawerOpen}
+        onClose={toggleDrawer()}
         anchorActions="flex-end"
         title="Historial de cambios"
-        open={isDrawerOpen}
         width="502px"
+        actions={false}
         children={
           <Box>
             <Box pb="6px">
@@ -183,7 +183,7 @@ export default function Timeline1() {
                         </IconButton>
                       </Box>
                       <Box>
-                        <Typography variant="body2" color="text.primary">
+                        <Typography variant="body3" color="text.primary">
                           Usuario cliente 2
                         </Typography>
                       </Box>
@@ -206,12 +206,13 @@ export default function Timeline1() {
                           11:30:41 a.m.
                         </Typography>
                         <Chip
-                          label="Editado"
+                          label="Prueba del chip"
                           color="warning"
                           size="small"
                           variant="filled"
                         />
                       </Box>
+                        
                       <Box
                         display={"flex"}
                         justifyContent={"space-between"}
@@ -225,7 +226,7 @@ export default function Timeline1() {
                         </IconButton>
                       </Box>
                       <Box>
-                        <Typography variant="body2" color="text.primary">
+                        <Typography variant="body3" color="text.primary">
                           Usuario cliente 2
                         </Typography>
                       </Box>
@@ -254,6 +255,7 @@ export default function Timeline1() {
                           variant="filled"
                         />
                       </Box>
+                        
                       <Box
                         display={"flex"}
                         justifyContent={"space-between"}
@@ -267,7 +269,7 @@ export default function Timeline1() {
                         </IconButton>
                       </Box>
                       <Box>
-                        <Typography variant="body2" color="text.primary">
+                        <Typography variant="body3" color="text.primary">
                           Usuario cliente 2
                         </Typography>
                       </Box>
@@ -309,7 +311,7 @@ export default function Timeline1() {
                         </IconButton>
                       </Box>
                       <Box>
-                        <Typography variant="body2" color="text.primary">
+                        <Typography variant="body3" color="text.primary">
                           Usuario cliente 2
                         </Typography>
                       </Box>
@@ -342,8 +344,13 @@ export default function Timeline1() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ backgroundColor: "grey.100" }}>
-                <Timeline>
-                  <TimelineItem>
+                <Timeline  sx={{
+                    padding: 0,
+                    [`& .${timelineOppositeContentClasses.root}`]: {
+                      flex: 0.2,
+                    },
+                  }}>
+                 <TimelineItem sx={{ gap: 1 }}>
                     <TimelineOppositeContent sx={{ padding: "8px 0px" }}>
                       <Typography variant="body2" color="text.secondary">
                         12/08/2024
@@ -354,17 +361,13 @@ export default function Timeline1() {
                       <TimelineConnector />
                     </TimelineSeparator>
                     <TimelineContent sx={{ padding: "8px 0px" }}>
-                      <Box
-                        display={"flex"}
-                        justifyContent={"space-between"}
-                        gap={1}
-                      >
+                      <Box display={"flex"} justifyContent={"space-between"}>
                         <Typography variant="body2" color="text.secondary">
                           11:30:41 a.m.
                         </Typography>
                         <Chip
-                          label="Editado"
-                          color="warning"
+                          label="Eliminado"
+                          color="error"
                           size="small"
                           variant="filled"
                         />
@@ -382,13 +385,13 @@ export default function Timeline1() {
                         </IconButton>
                       </Box>
                       <Box>
-                        <Typography variant="body2" color="text.primary">
+                        <Typography variant="body3" color="text.primary">
                           Usuario cliente 2
                         </Typography>
                       </Box>
                     </TimelineContent>
                   </TimelineItem>
-                </Timeline>
+                  </Timeline>
               </AccordionDetails>
             </Accordion>
           </Box>

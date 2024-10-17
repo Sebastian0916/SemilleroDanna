@@ -4,12 +4,12 @@ import './index.css'
 import { ThemeProvider } from '@emotion/react'
 import { SincoTheme } from '@sinco/react'
 
-import Timeline2 from './ejemploTimeline/Timeline2'
+import Timeline1 from './ejemploTimeline/Timeline1'
 
 createRoot(document.getElementById('root')!).render(
   <ThemeProvider theme={SincoTheme}>
   <StrictMode>
-  <Timeline2 />
+  <Timeline1 />
   </StrictMode>
   </ThemeProvider>
 )
