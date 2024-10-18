@@ -76,6 +76,17 @@
       "genero": 1,
       "estadoCivil": 1,
       "tipoContrato": 1
+    },
+    {
+      "id": "9bf0",
+      "nombres": "danna",
+      "apellidos": "Melo",
+      "documento": "3456789333",
+      "edad": 45,
+      "salario": 243465656,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
     }
   ]
 }
