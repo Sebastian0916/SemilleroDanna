@@ -1,0 +1,92 @@
+{
+  "empleados": [
+    {
+      "id": "32d6",
+      "nombres": "Lucía",
+      "apellidos": " Martínez Gómez",
+      "documento": "3456789333",
+      "edad": 464574,
+      "salario": 21332322,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
+    },
+    {
+      "id": "d722",
+      "nombres": "cristian",
+      "apellidos": "lozano",
+      "documento": "2345678765",
+      "edad": 19,
+      "salario": 678765432,
+      "genero": 1,
+      "estadoCivil": 2,
+      "tipoContrato": 1
+    },
+    {
+      "id": "e0c7",
+      "nombres": "Danna ",
+      "apellidos": "Urrego",
+      "documento": "1234567887",
+      "edad": 19,
+      "salario": 134556789,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
+    },
+    {
+      "id": "cc33",
+      "nombres": "xdcdcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcfcf",
+      "apellidos": "nxdcndcbdwcwd",
+      "documento": "3456789098",
+      "edad": 44,
+      "salario": 34567890,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
+    },
+    {
+      "id": "bda3",
+      "nombres": "Theodore Whitmore",
+      "apellidos": "Theodore Whitmore",
+      "documento": "3456758697",
+      "edad": 19,
+      "salario": 5364656746556,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
+    },
+    {
+      "id": "cbde",
+      "nombres": "Cassandra Wellington",
+      "apellidos": "Cassandra Wellington",
+      "documento": "3456787909",
+      "edad": 18,
+      "salario": 34567898765432,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
+    },
+    {
+      "id": "2c00",
+      "nombres": "Alexandria Montgomery",
+      "apellidos": "Alexandria Montgomery",
+      "documento": "2547856960",
+      "edad": 19,
+      "salario": 234567890,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
+    },
+    {
+      "id": "9bf0",
+      "nombres": "danna",
+      "apellidos": "Melo",
+      "documento": "3456789333",
+      "edad": 45,
+      "salario": 243465656,
+      "genero": 1,
+      "estadoCivil": 1,
+      "tipoContrato": 1
+    }
+  ]
+}
